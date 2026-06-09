@@ -28,11 +28,11 @@ Logout
         ))}
       </nav>
 
-      {/* Bottom - Logout */}
+      {/* Logout */}
       <div className="p-4 border-t">
-        <button className="w-full text-left px-3 py-2 rounded hover:bg-red-100 text-red-600 transition">
-          Log out
-        </button>
+        <Link href="/" className="block w-full text-left px-3 py-2 rounded hover:bg-red-100 text-red-600 transition">
+            Log out
+        </Link>
       </div>
     </aside>
   );
