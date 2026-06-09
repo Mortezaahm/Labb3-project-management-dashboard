@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <nav className="border-b border-gray-200">
-      <div className="container mx-auto flex flex h-16 items-center justify-between px-4 font-bold">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 font-bold">
         <Link href="/">
         TaskFlow
         </Link>
