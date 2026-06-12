@@ -5,13 +5,13 @@ import { signIn } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
 
 export default function Login() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
 
     const router = useRouter()
 
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false)
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -30,7 +30,7 @@ export default function Login() {
             } else {
                 router.push('/dashboard')
             }
-        } catch (error) {
+        } catch (error: unknown) {
             setError(
                 error instanceof Error ? error.message : 'An error occurred'
             )
@@ -40,7 +40,19 @@ export default function Login() {
     }
 
     return (
-        <div className="flex min-h-screen items-center justify-center p-4 bg-gray-100">
+        <div className="flex min-h-screen">
+          <div className="hidden md:flex w-1/2 bg-cover bg-center items-center justify-center"
+          style={{ backgroundImage: "url('/login2.jpg')"
+           }}
+           role="img"
+           aria-label="login image with a notepad, pen and a coffee cup"
+           >
+            <span className="sr-only">
+              Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk
+            </span>
+          </div>
+
+            <div className="flex w-1/2 items-center justify-center p-8 bg-gray-100 ">
             <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8 ">
                 <h2 className="text-center text-3xl font-bold mb-4">Login</h2>
                 <p className="text-center text-gray-600 mb-4">
@@ -109,6 +121,7 @@ export default function Login() {
                     </div>
                 </form>
             </div>
-        </div>
+         </div>
+      </div>
     )
 }
