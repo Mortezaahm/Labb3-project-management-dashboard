@@ -7,10 +7,13 @@ export default function Navbar() {
         <Link href="/">
         TaskFlow
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="hidden items-center gap-4 md:flex">
           <Link href="/register">Join Now</Link>
           <Link href="/login">Login</Link>
         </div>
+        <button className="md:hidden">
+          ☰
+        </button>
       </div>
     </nav>
   )
