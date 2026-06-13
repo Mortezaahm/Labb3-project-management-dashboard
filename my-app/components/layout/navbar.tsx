@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LoginStatus } from "./loginStatus";
+import { LoginStatus } from "../loginStatus";
 
 export default async function Navbar() {
 

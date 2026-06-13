@@ -30,7 +30,7 @@ export default function Register() {
       if (res.error) {
         setError(res.error.message ?? "Error")
       } else {
-        router.push("/login")
+        router.push("/dashboard")
       }
     } catch (error) {
       setError(error instanceof Error ? error.message :"An error occurred" )
