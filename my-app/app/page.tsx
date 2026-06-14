@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
 import { User } from "@/types/types";
 // Primary:#2563EB Success:#22C55E Warning:#F59E0B Danger:#EF4444
+import { Button } from "@/components/button";
 
 export default async function Home() {
   const session = await getSession()

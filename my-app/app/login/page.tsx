@@ -25,10 +25,11 @@ export default function Login() {
                 password
             })
 
-            if (res.error) {
-                setError(res.error.message ?? 'Login failed')
-            } else {
+            if (!res.error) {
+                router.refresh()
                 router.push('/dashboard')
+            } else {
+                setError(res.error.message ?? 'Login failed')
             }
         } catch (error: unknown) {
             setError(
