@@ -9,7 +9,7 @@ if (!MONGODB_URI) {
 }
 
 const client = new MongoClient(MONGODB_URI);
-const db = client.db('projectmanager')
+const db = client.db('Nextjs-Lab3') // you can change the database name if you want, but make sure to update it in the .env.local file as well
 
 export const auth = betterAuth({
     database: mongodbAdapter(db, {client}),

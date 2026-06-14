@@ -53,7 +53,7 @@ export default function Login() {
             </span>
           </div>
 
-            <div className="flex w-1/2 items-center justify-center p-8 bg-gray-100 ">
+            <div className="flex items-center justify-center p-8 bg-gray-100 ">
             <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8 ">
                 <h2 className="text-center text-3xl font-bold mb-4">Login</h2>
                 <p className="text-center text-gray-600 mb-4">
