@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/button";
+import registerSchema from "@/lib/registerSchema";
 
 export default function Register() {
   const [name, setName] = useState<string>('');
@@ -20,11 +22,19 @@ export default function Register() {
     setError("")
     setLoading(true)
 
+    const validationResult = registerSchema.safeParse({ name, email, password })
+
+    if (!validationResult.success) {
+      setError( validationResult.error.issues[0].message)
+      setLoading(false)
+      return
+    }
+
     try {
       const res = await signUp.email({
-        email,
-        name,
-        password
+        email: validationResult.data.email,
+        name: validationResult.data.name,
+        password: validationResult.data.password
       })
 
       if (res.error) {
@@ -40,7 +50,7 @@ export default function Register() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4 bg-gray-100">
+    <div className="flex min-h-screen items-center justify-center p-4 bg-gray-100 dark:bg-gray-800">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         <h2 className="text-center text-3xl font-bold mb-4">Create a new account </h2>
         <p className="text-center text-gray-600 mb-4">Create a free account to start managing your projects.</p>
@@ -69,13 +79,12 @@ export default function Register() {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  />
               </div>
               {error && <p className="text-red-500 text-sm">{error} </p>}
-              <button type="submit" disabled={loading} className="w-full py-2 px-4 bg-blue-900 text-white font-bold rounded-md shadow  hover:bg-blue-700 transition-colors mt-4 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">{loading ? "Creating account ": "Sign up"}</button>
+              <Button type="submit" disabled={loading} className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4">{loading ? "Creating account ": "Sign up"}</Button>
               <p className="text-center mt-2">Already have an account?{" "}<Link href="/login" className="text-blue-800">Login</Link> </p>
             </div>
           </div>
         </form>
       </div>
-
     </div>
   )
 }

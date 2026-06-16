@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { signIn } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
+import { Button } from "@/components/button";
+import Image from "next/image";
 
 export default function Login() {
     const [email, setEmail] = useState<string>('')
@@ -42,19 +44,16 @@ export default function Login() {
 
     return (
         <div className="flex min-h-screen">
-          <div className="hidden md:flex w-1/2 bg-cover bg-center items-center justify-center"
-          style={{ backgroundImage: "url('/login2.jpg')"
-           }}
-           role="img"
-           aria-label="login image with a notepad, pen and a coffee cup"
+          <div className="hidden md:flex w-1/2 relative"
            >
+            <Image src="/login2.jpg" alt="login image with a notepad, pen and a coffee cup" layout="fill" priority objectFit="cover" sizes="50vw" className="object-cover" />
             <span className="sr-only">
               Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk
             </span>
           </div>
 
-            <div className="flex items-center justify-center p-8 bg-gray-100 ">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8 ">
+            <div className="flex md:flex w-1/2 bg-cover items-center justify-center p-8 bg-gray-100 dark:bg-gray-800">
+            <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
                 <h2 className="text-center text-3xl font-bold mb-4">Login</h2>
                 <p className="text-center text-gray-600 mb-4">
                     Login to your account to start managing your projects.
@@ -102,13 +101,13 @@ export default function Login() {
                             {error && (
                                 <p className="text-red-500 text-sm">{error} </p>
                             )}
-                            <button
+                            <Button
                                 type="submit"
-                                className="w-full py-2 px-4 bg-blue-900 text-white font-bold rounded-md shadow  hover:bg-blue-700 transition-colors mt-4 cursor-pointer"
+                                className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4"
                                 disabled={loading}
                             >
                                 {loading ? 'logging in...' : 'Login'}{' '}
-                            </button>
+                            </Button>
                             <p className="text-center mt-2">
                                 Not signed up?{' '}
                                 <Link
