@@ -1,12 +1,18 @@
+import { ObjectId } from "mongodb";
 
-export interface User {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  image?: string
-  role: string
-  bio: string
-  theme: string
-  fontSize: string
+export interface UserProfile {
+  _id: ObjectId;
+
+  name: string;
+  email: string;
+
+  image?: string;
+
+  bio?: string;
+
+  theme?: string;
+
+  fontSize?: string;
+
+  emailVerified: boolean;
 }

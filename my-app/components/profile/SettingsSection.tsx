@@ -1,13 +1,10 @@
-/*
-Settings
+type SettingsSectionProps = {
+  user: {
+    theme?: string;
+  };
+};
 
-Notifications
-
-Language
-
-Theme
-*/
-export default function SettingsSection() {
+export default function SettingsSection({user}: SettingsSectionProps) {
     return (
         <>
         <h2 className="text-xl font-semibold mb-4">Settings</h2>
@@ -19,7 +16,7 @@ export default function SettingsSection() {
                 <option>Swedish</option>
             </select></span>
         </p>
-        <p className="text-gray-600 mb-2">Theme: <span className="font-semibold">Light</span></p>
+        <p className="text-gray-600 mb-2">Theme: <span className="font-semibold">{user.theme || "light"}</span></p>
         <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
           Manage Settings
         </button>
