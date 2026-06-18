@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { signIn } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
 import { Button } from "@/components/button";
-import Image from "next/image";
+import { SideImage } from "@/components/image";
 
 export default function Login() {
     const [email, setEmail] = useState<string>('')
@@ -44,15 +44,9 @@ export default function Login() {
 
     return (
         <div className="flex min-h-screen">
-          <div className="hidden md:flex w-1/2 relative"
-           >
-            <Image src="/login2.jpg" alt="login image with a notepad, pen and a coffee cup" layout="fill" priority objectFit="cover" sizes="50vw" className="object-cover" />
-            <span className="sr-only">
-              Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk
-            </span>
-          </div>
+          <SideImage src="/login2.jpg" alt="login image with a notepad, pen and a coffee cup" credit="Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk" />
 
-            <div className="flex md:flex w-1/2 bg-cover items-center justify-center p-8 bg-gray-100 dark:bg-gray-800">
+            <div className="flex w-full md:w-1/2 items-center justify-center p-8 bg-gray-100 dark:bg-gray-800">
             <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
                 <h2 className="text-center text-3xl font-bold mb-4">Login</h2>
                 <p className="text-center text-gray-600 mb-4">
@@ -74,7 +68,7 @@ export default function Login() {
                             placeholder="John@example.com"
                             required
                             onChange={(e) => setEmail(e.target.value)}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white mb-2 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         />
                         <div>
                             <div>
@@ -95,7 +89,7 @@ export default function Login() {
                                     onChange={(e) =>
                                         setPassword(e.target.value)
                                     }
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 />
                             </div>
                             {error && (

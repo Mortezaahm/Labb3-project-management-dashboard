@@ -10,7 +10,7 @@ export default async function Home() {
   const user = session?.user as User | undefined
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 dark:bg-gray-800 dark:text-white">
-      <main className="flex-1">
+      <div className="flex-1">
         {user ?(
                   <>
                   <div className="container mx-auto px-4 py-32">
@@ -39,7 +39,7 @@ export default async function Home() {
 
         </section>
         </> )}
-      </main>
+      </div>
     </div>
   );
 }

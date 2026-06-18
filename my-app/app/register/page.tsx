@@ -5,6 +5,7 @@ import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/button";
 import registerSchema from "@/lib/registerSchema";
+import { SideImage } from "@/components/image";
 
 export default function Register() {
   const [name, setName] = useState<string>('');
@@ -50,8 +51,14 @@ export default function Register() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4 bg-gray-100 dark:bg-gray-800">
+
+    <div className="flex min-h-screen">
+
+    <SideImage src="/login2.jpg" alt="login image with a notepad, pen and a coffee cup" credit="Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk" />
+
+    <div className="flex w-full md:w-1/2 items-center justify-center p-4 bg-gray-100 dark:bg-gray-800">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+
         <h2 className="text-center text-3xl font-bold mb-4">Create a new account </h2>
         <p className="text-center text-gray-600 mb-4">Create a free account to start managing your projects.</p>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -60,13 +67,13 @@ export default function Register() {
             <input type="email" id="email" placeholder="John@example.com"
             onChange={(e) => setEmail(e.target.value)}
               value={email}
-            required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white mb-2 dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
             <div>
               <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Name</label>
               <input type="text" id="name" placeholder="John Doe"
               onChange={(e) => setName(e.target.value)}
               value={name}
-              required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 mb-2 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+              required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
 
               <div>
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
@@ -76,7 +83,7 @@ export default function Register() {
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
               value={password}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  />
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  />
               </div>
               {error && <p className="text-red-500 text-sm">{error} </p>}
               <Button type="submit" disabled={loading} className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4">{loading ? "Creating account ": "Sign up"}</Button>
@@ -86,5 +93,6 @@ export default function Register() {
         </form>
       </div>
     </div>
+  </div>
   )
 }

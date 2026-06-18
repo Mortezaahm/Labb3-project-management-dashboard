@@ -10,8 +10,10 @@ export default async function Navbar() {
         <Link href="/">
         TaskFlow
         </Link>
+        <div className="flex items-center gap-4">
         <ThemeToggle />
         <LoginStatus />
+        </div>
       </div>
     </nav>
   )
