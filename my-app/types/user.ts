@@ -7,12 +7,14 @@ export interface UserProfile {
   email: string;
 
   image?: string;
-
   bio?: string;
 
-  theme?: string;
+  theme?: "light" | "dark";
+  fontSize?: "small" | "medium" | "large";
 
-  fontSize?: string;
+  language?: "en" | "sv";
+
+  notifications?: boolean;
 
   emailVerified: boolean;
 }

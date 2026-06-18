@@ -25,6 +25,10 @@ export default async function ProfilePage() {
     return <div>Database connection error</div>
   }
 
+  if (!ObjectId.isValid(session.user.id)) {
+    return <div>Invalid user</div>
+  }
+
   const user = await connection.db
   .collection<UserProfile>("user")
   .findOne({

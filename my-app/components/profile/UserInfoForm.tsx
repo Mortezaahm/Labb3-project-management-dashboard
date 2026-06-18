@@ -5,7 +5,6 @@ type UserInfoFormProps = {
     user: {
         name: string
         email: string
-        role: string
         bio?: string
     }
 }

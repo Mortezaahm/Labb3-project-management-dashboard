@@ -4,6 +4,21 @@ import { auth } from "@/lib/auth";
 import { connectDB } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
+type SettingsBody = {
+ theme?: "light" | "dark";
+ fontSize?: "small" | "medium" | "large";
+ language?: "en" | "sv";
+ notifications?: boolean;
+}
+
+type SettingsUpdate = {
+    theme?: "light" | "dark";
+    fontSize?: "small" | "medium" | "large";
+    language?: "en" | "sv";
+    notifications?: boolean;
+    updatedAt: Date;
+};
+
 export async function GET() {
     try {
         const session = await auth.api.getSession({
@@ -41,6 +56,8 @@ export async function GET() {
             projection: {
                 theme: 1,
                 fontSize: 1,
+                language:1,
+                notifications: 1,
             },
         })
 
@@ -76,19 +93,19 @@ export async function PATCH(request: Request) {
             )
         }
 
-        const { theme , fontSize } = await request.json();
+        const { theme , fontSize , language , notifications }: SettingsBody = await request.json();
 
         const allowedThemes = ["light", "dark"];
         const allowedFontSizes = ["small", "medium", "large"];
 
-        if (!allowedThemes.includes(theme)) {
+        if (theme && !allowedThemes.includes(theme)) {
             return NextResponse.json(
                 { message: "Invalid theme" },
                 { status: 400 }
             )
         }
 
-        if (!allowedFontSizes.includes(fontSize)) {
+        if (fontSize && !allowedFontSizes.includes(fontSize)) {
             return NextResponse.json(
                 { message: "Invalid font size" },
                 { status: 400 }
@@ -111,16 +128,33 @@ export async function PATCH(request: Request) {
             );
         }
 
+        const updateData: SettingsUpdate = {
+            updatedAt: new Date()
+        };
+
+
+        if (theme) {
+            updateData.theme = theme;
+        }
+
+        if (fontSize) {
+            updateData.fontSize = fontSize;
+        }
+
+        if (language) {
+            updateData.language = language;
+        }
+
+        if (typeof notifications === "boolean") {
+            updateData.notifications = notifications;
+        }
+
         await connection.db.collection("user").updateOne(
             {
                 _id: new ObjectId(session.user.id),
             },
             {
-                $set: {
-                    theme,
-                    fontSize,
-                    updatedAt: new Date(),
-                },
+                $set: updateData
             }
         );
 
