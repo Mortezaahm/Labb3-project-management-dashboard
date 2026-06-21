@@ -36,7 +36,7 @@ export default function AccessibilitySection({user}: AccessibilitySectionProps) 
                 throw new Error(data.message)
             }
 
-            setMessage("Settings updated successfully")
+            setMessage("Updated successfully")
         } catch (error) {
             setMessage(
                 error instanceof Error ? error.message : "Something went wrong"

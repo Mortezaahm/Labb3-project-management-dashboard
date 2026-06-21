@@ -33,6 +33,17 @@ export default async function ProfilePage() {
   .collection<UserProfile>("user")
   .findOne({
     _id: new ObjectId(session.user.id),
+  }, {
+    projection: {
+      name: 1,
+      email: 1,
+      image: 1,
+      bio: 1,
+      theme: 1,
+      fontSize: 1,
+      language: 1,
+      notifications: 1
+    }
   });
 
   if (!user) {
@@ -40,19 +51,29 @@ export default async function ProfilePage() {
   }
 
   // const user = session.user
+  const userData = {
+    name: user.name,
+    email: user.email,
+    image: user.image,
+    bio: user.bio,
+    theme: user.theme,
+    fontSize: user.fontSize,
+    language: user.language,
+    notifications: user.notifications,
+  }
 
   return (
     <div className="container py-8">
       <div className="bg-white shadow rounded-lg p-6 mb-6">
         <ProfileHeader />
-        <AvatarSection user={user} />
-        <UserInfoForm user={user} />
+        <AvatarSection user={userData} />
+        <UserInfoForm user={userData} />
       </div>
       <div className="bg-white shadow rounded-lg p-6 mb-6">
-        <SettingsSection user={user}/>
+        <SettingsSection user={userData}/>
       </div>
       <div className="bg-white shadow rounded-lg p-6 mb-6">
-        <AccessibilitySection user={user}/>
+        <AccessibilitySection user={userData}/>
       </div>
     </div>
   );

@@ -51,40 +51,40 @@ export default function SettingsSection({user}: SettingsSectionProps) {
     }
   }
 
-    return (
-      <>
-        <h2 className="text-xl font-semibold mb-4">Settings</h2>
-        <p className="text-gray-600 mb-2">Here you can manage your account settings, privacy preferences, and notification options.</p>
-        <p className="text-gray-600 mb-2">Notifications:
-          <span className="font-semibold">
-            <input
-              type="checkbox"
-              checked={notifications}
-              onChange={(e) => setNotifications(e.target.checked)}
-            />
-            Enabled
-          </span>
-        </p>
-        <p className="text-gray-600 mb-2">Language: <span className="font-semibold">
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value as "en" | "sv")}
-            >
-              <option value="en">English</option>
-              <option value="sv">Swedish</option>
-            </select></span>
-        </p>
+  return (
+    <>
+      <h2 className="text-xl font-semibold mb-4">Settings</h2>
+      <p className="text-gray-600 mb-2">Here you can manage your account settings, privacy preferences, and notification options.</p>
+      <p className="text-gray-600 mb-2">Notifications:
+        <span className="font-semibold">
+          <input
+            type="checkbox"
+            checked={notifications}
+            onChange={(e) => setNotifications(e.target.checked)}
+          />
+          Enabled
+        </span>
+      </p>
+      <p className="text-gray-600 mb-2">Language: <span className="font-semibold">
+          <select
+            value={language}
+            onChange={(e) => setLanguage(e.target.value as "en" | "sv")}
+          >
+            <option value="en">English</option>
+            <option value="sv">Swedish</option>
+          </select></span>
+      </p>
 
-        <button
-          onClick={handleSave}
-          disabled={loading}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          {loading ? "Saving..." : "Save Settings"}
-        </button>
-        {message && (
-          <p className="mt-2 text-sm">{message}</p>
-        )}
-      </>
-    )
+      <button
+        onClick={handleSave}
+        disabled={loading}
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        {loading ? "Saving..." : "Save Settings"}
+      </button>
+      {message && (
+        <p className="mt-2 text-sm">{message}</p>
+      )}
+    </>
+  )
 }
