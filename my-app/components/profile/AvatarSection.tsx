@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 type AvatarSectionProps = {
@@ -10,23 +11,29 @@ type AvatarSectionProps = {
 };
 
 export default function AvatarSection({user}: AvatarSectionProps) {
-  const [image, setImage] = useState(user.image || "");
+  // const [image, setImage] = useState(user.image || "");
+  const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleSave = async () => {
+  const router = useRouter();
+
+  const handleUpload = async () => {
     try {
-      setLoading(true)
       setMessage("")
+      if (!file) {
+        setMessage("Please select a file to upload");
+        return;
+      }
+
+      setLoading(true)
+
+      const formData = new FormData();
+      formData.append("avatar", file);
 
       const response = await fetch ("/api/avatar", {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          image
-        })
+        body: formData
       })
 
       const data = await response.json()
@@ -35,6 +42,7 @@ export default function AvatarSection({user}: AvatarSectionProps) {
       }
 
       setMessage("Avatar updated successfully")
+      router.refresh();
     } catch (error) {
       setMessage(
         error instanceof Error
@@ -49,7 +57,7 @@ export default function AvatarSection({user}: AvatarSectionProps) {
   return (
     <>
       <Image
-        src={image || "/default-avatar.png"}
+        src={user.image || "/default-avatar.png"}
         alt={`${user.name} avatar`}
         width={96}
         height={96}
@@ -60,14 +68,15 @@ export default function AvatarSection({user}: AvatarSectionProps) {
         className="block text-sm font-medium text-gray-700 mb-1"> Choose an Avatar... </label>
       <input
         id="avatar-upload"
-        type="text"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
-        placeholder="Avatar URL"
+        type="file"
+        accept="image/*"
+        onChange={(e) => {
+          setFile(e.target.files?.[0] || null);
+        }}
         className="w-full border rounded py-2 px-4 mr-2 mb-4"
       />
       <button
-        onClick={handleSave}
+        onClick={handleUpload}
         className="mb-4 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">
           {loading ? "Changing..." : "Change Avatar" }
       </button>
