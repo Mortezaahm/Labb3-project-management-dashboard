@@ -7,7 +7,6 @@ import { ObjectId } from "mongodb";
 import path from "path";
 import fs from "fs/promises";
 
-
 export async function GET() {
   try {
     const session = await auth.api.getSession({
@@ -59,10 +58,9 @@ export async function GET() {
     return NextResponse.json({
       user,
     });
+
   } catch (error) {
-
     console.error(error);
-
     return NextResponse.json(
       { message: "Server error" },
       { status: 500 }
@@ -83,6 +81,13 @@ export async function PATCH(request: Request) {
             )
         }
 
+        if (!ObjectId.isValid(session.user.id)) {
+            return NextResponse.json(
+                { message: "Invalid user id" },
+                { status: 400 }
+            );
+        }
+
         const formData = await request.formData();
 
         const file = formData.get("avatar") as File;
@@ -94,15 +99,6 @@ export async function PATCH(request: Request) {
             )
         }
 
-        // const { image } = await request.json();
-
-        // if (!image || typeof image !== "string") {
-        //     return NextResponse.json(
-        //         { message: "Image is required" },
-        //         { status: 400 }
-        //     )
-        // }
-
         const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
 
         if (!allowedTypes.includes(file.type)) {
@@ -111,20 +107,6 @@ export async function PATCH(request: Request) {
                 { status: 400 }
             );
         }
-
-        const extension = file.name.split(".").pop();
-
-        const fileName = `${session.user.id}-${Date.now()}.${extension}`;
-
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-
-        const uploadDir = path.join(process.cwd(), "public", "uploads");
-
-        await fs.mkdir(uploadDir, { recursive: true });
-        await fs.writeFile(path.join(uploadDir, fileName), buffer);
-
-        const imagePath = `/uploads/${fileName}`;
 
         const connection = (await connectDB()).connection;
 
@@ -135,13 +117,20 @@ export async function PATCH(request: Request) {
             );
         }
 
-        if (!ObjectId.isValid(session.user.id)) {
+        const existingUser = await connection.db.collection("user").findOne({
+            _id: new ObjectId(session.user.id)
+        });
+
+        if (!existingUser) {
             return NextResponse.json(
-                { message: "Invalid user id" },
-                { status: 400 }
+                { message: "User not found" },
+                { status: 404 }
             );
         }
 
+        const extension = file.name.split(".").pop();
+
+        const fileName = `${session.user.id}-${Date.now()}.${extension}`;
 
         // Check if the file is empty
         if (file.size === 0) {
@@ -159,6 +148,25 @@ export async function PATCH(request: Request) {
             { message: "File too large" },
             { status: 400 }
           );
+        }
+
+        const bytes = await file.arrayBuffer();
+        const buffer = Buffer.from(bytes);
+
+        const uploadDir = path.join(process.cwd(), "public", "uploads");
+
+        await fs.mkdir(uploadDir, { recursive: true });
+        await fs.writeFile(path.join(uploadDir, fileName), buffer);
+
+        const imagePath = `/uploads/${fileName}`;
+
+        if (existingUser.image && existingUser.image.startsWith("/uploads/")) {
+            // Delete the existing image file
+            try {
+                await fs.unlink(path.join(process.cwd(), "public", existingUser.image));
+            } catch (error) {
+                console.error("Error deleting existing image file:", error);
+            }
         }
 
         await connection.db.collection("user").updateOne(
