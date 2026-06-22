@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useState , useRef , useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -11,10 +11,12 @@ type AvatarSectionProps = {
 };
 
 export default function AvatarSection({user}: AvatarSectionProps) {
-  // const [image, setImage] = useState(user.image || "");
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [preview, setPreview] = useState(user.image || "");
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
 
@@ -54,30 +56,50 @@ export default function AvatarSection({user}: AvatarSectionProps) {
     }
   }
 
+  useEffect(() => {
+    return () => {
+      if (preview.startsWith("blob:")) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
+
   return (
     <>
       <Image
-        src={user.image || "/default-avatar.png"}
+        src={preview || user.image || "/default-avatar.png"}
         alt={`${user.name} avatar`}
         width={96}
         height={96}
         className="border-2 border-amber-500 rounded-full mb-4"
       />
-      <label
-        htmlFor="avatar-upload"
-        className="block text-sm font-medium text-gray-700 mb-1"> Choose an Avatar... </label>
+
       <input
+        ref={fileInputRef}
         id="avatar-upload"
         type="file"
         accept="image/*"
         onChange={(e) => {
-          setFile(e.target.files?.[0] || null);
+          const selectedFile = e.target.files?.[0];
+          if (!selectedFile) return;
+
+          setFile(selectedFile);
+
+          const previewUrl = URL.createObjectURL(selectedFile);
+          setPreview(previewUrl);
         }}
-        className="w-full border rounded py-2 px-4 mr-2 mb-4"
+        className="hidden"
       />
       <button
+        type="button"
+        onClick={() => fileInputRef.current?.click()}
+        className="mb-4 mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+      >
+        Choose Avatar
+      </button>
+      <button
         onClick={handleUpload}
-        className="mb-4 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">
+        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
           {loading ? "Changing..." : "Change Avatar" }
       </button>
       {message && (
