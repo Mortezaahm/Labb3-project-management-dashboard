@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { signIn } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
 import { Button } from "@/components/button";
-import { SideImage } from "@/components/image";
+import { SiteImage } from "@/components/image";
 
 export default function Login() {
     const [email, setEmail] = useState<string>('')
@@ -44,10 +44,10 @@ export default function Login() {
 
     return (
         <div className="flex min-h-screen">
-          <SideImage src="/login2.jpg" alt="login image with a notepad, pen and a coffee cup" credit="Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk" />
+          <SiteImage src="/login2.jpg" alt="login image with a notepad, pen and a coffee cup" variant="side" credit="Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk" />
 
             <div className="flex w-full md:w-1/2 items-center justify-center p-8 bg-gray-100 dark:bg-gray-800">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
+            <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
                 <h2 className="text-center text-3xl font-bold mb-4">Login</h2>
                 <p className="text-center text-gray-600 mb-4">
                     Login to your account to start managing your projects.

@@ -34,13 +34,13 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="system">
         <Navbar />
-       <main className="flex-1">
+       <main className="flex-1 dark:bg-gray-800 dark:text-gray-300">
         {children}
         </main>
        <Footer />
        </ThemeProvider>
        </body>
-
+       
     </html>
   );
 }
