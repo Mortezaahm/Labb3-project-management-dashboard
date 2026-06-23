@@ -4,6 +4,8 @@ import { connectDB } from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 import type { UserProfile } from "@/types/user";
 
+import Card from "@/components/ui/Card";
+
 import ProfileHeader from "@/components/profile/ProfileHeader";
 import AvatarSection from "@/components/profile/AvatarSection";
 import UserInfoForm from "@/components/profile/UserInfoForm";
@@ -63,18 +65,18 @@ export default async function ProfilePage() {
   }
 
   return (
-    <div className="container py-8">
-      <div className="bg-white shadow rounded-lg p-6 mb-6">
+    <div className="container mx-auto py-8">
+      <Card>
         <ProfileHeader />
         <AvatarSection user={userData} />
         <UserInfoForm user={userData} />
-      </div>
-      <div className="bg-white shadow rounded-lg p-6 mb-6">
+      </Card>
+      <Card>
         <SettingsSection user={userData}/>
-      </div>
-      <div className="bg-white shadow rounded-lg p-6 mb-6">
+      </Card>
+      <Card>
         <AccessibilitySection user={userData}/>
-      </div>
+      </Card>
     </div>
   );
 }

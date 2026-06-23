@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LoginStatus } from "../loginStatus";
+import ThemeToggle from "../theme/ThemeToggle";
 
 export default async function Navbar() {
 
@@ -10,6 +11,7 @@ export default async function Navbar() {
         TaskFlow
         </Link>
         <LoginStatus />
+        <ThemeToggle />
       </div>
     </nav>
   )

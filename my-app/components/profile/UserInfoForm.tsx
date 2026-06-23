@@ -1,5 +1,8 @@
 "use client";
 import { useState } from "react";
+import { ui } from "@/lib/styles";
+import Input from "@/components/ui/Input";
+import Button from "../ui/Button";
 
 type UserInfoFormProps = {
     user: {
@@ -48,46 +51,44 @@ export default function UserInfoForm( {user} : UserInfoFormProps) {
 
     return (
         <>
-        <h2 className="text-xl font-semibold mb-4">Personal Information</h2>
+        <h2 className={ui.subtitle}>Personal Information</h2>
         <label
             htmlFor="name"
-            className="block text-sm font-medium text-gray-700 mb-1">
+            className={ui.label}>
             Name
         </label>
-        <input
+        <Input
             id="name"
-            className="w-full border rounded py-2 px-4 mr-2 mb-4"
             value={name}
             onChange={(e) => {setName(e.target.value)}}
         />
         <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1">
-                Email
+            className={ui.label}>
+            Email
         </label>
-        <input
+        <Input
             id="email"
-            className="w-full border rounded py-2 px-4 mr-2 mb-4"
-            defaultValue={user.email}
+            value={user.email}
             readOnly
         />
         <label
             htmlFor="bio"
-            className="block text-sm font-medium text-gray-700 mb-1">
+            className={ui.label}>
                 Bio
         </label>
         <textarea
             id="bio"
-            className="w-full border rounded py-2 px-4 mr-2 mb-4"
+            className={ui.input}
             value={bio}
             onChange={(e) => setBio(e.target.value)}
         />
-        <button
+        <Button
             onClick={handleSubmit}
             disabled={loading}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        >
           {loading ? "Saving..." : "Save Changes"}
-        </button>
+        </Button>
         {message && (
             <p className="mt-2 text-sm">{message}</p>
         )}

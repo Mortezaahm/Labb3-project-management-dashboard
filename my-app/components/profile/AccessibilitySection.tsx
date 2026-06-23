@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import { ui } from "@/lib/styles";
 
 type AccessibilitySectionProps = {
   user: {
@@ -48,9 +49,9 @@ export default function AccessibilitySection({user}: AccessibilitySectionProps) 
 
     return (
         <>
-            <h2 className="text-xl font-semibold mb-4">Accessibility</h2>
-            <p className="text-gray-600 mb-2">Here you can manage your accessibility preferences and customize your experience.</p>
-            <h4 className="text-lg font-semibold mb-2">Text Size</h4>
+            <h2 className={ui.subtitle}>Accessibility</h2>
+            <p className={ui.text}>Here you can manage your accessibility preferences and customize your experience.</p>
+            <h4 className={ui.subtitle}>Text Size</h4>
             <select
                 value={fontSize}
                 onChange={(e) => setFontSize(e.target.value as "small" | "medium" | "large")}
@@ -61,8 +62,8 @@ export default function AccessibilitySection({user}: AccessibilitySectionProps) 
                 <option value="large">Large</option>
             </select>
 
-            <h4 className="text-lg font-semibold mb-2">Change Theme</h4>
-            <label htmlFor="darkMode" className="flex items-center gap-2">
+            <h4 className={ui.subtitle}>Change Theme</h4>
+            <label htmlFor="darkMode" className={ui.label}>
                 <input
                     id="darkMode"
                     type="radio"
@@ -74,7 +75,7 @@ export default function AccessibilitySection({user}: AccessibilitySectionProps) 
                 />
                 Dark Mode
             </label>
-            <label htmlFor="lightMode" className="flex items-center gap-2">
+            <label htmlFor="lightMode" className={ui.label}>
                 <input
                     id="lightMode"
                     type="radio"
@@ -89,11 +90,11 @@ export default function AccessibilitySection({user}: AccessibilitySectionProps) 
             <button
                 onClick={handleSave}
                 disabled={loading}
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                className={ui.buttonPrimary}>
             {loading ? "Saving..." : "Save Changes"}
             </button>
             {message && (
-                <p className="mt-2 text-sm">{message}</p>
+                <p className={ui.text}>{message}</p>
             )}
         </>
 

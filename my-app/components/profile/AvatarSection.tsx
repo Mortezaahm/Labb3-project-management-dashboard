@@ -3,6 +3,8 @@ import { useState , useRef , useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+import Button from "@/components/ui/Button";
+
 type AvatarSectionProps = {
   user: {
     name: string;
@@ -97,11 +99,11 @@ export default function AvatarSection({user}: AvatarSectionProps) {
       >
         Choose Avatar
       </button>
-      <button
+      <Button
         onClick={handleUpload}
-        className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+      >
           {loading ? "Changing..." : "Change Avatar" }
-      </button>
+      </Button>
       {message && (
         <p className="mt-2 text-sm">{message}</p>
       )}
