@@ -1,15 +1,19 @@
 import Link from "next/link";
 import { LoginStatus } from "../loginStatus";
+import ThemeToggle from "./themeToggle";
 
 export default async function Navbar() {
 
   return (
-    <nav className="border-b border-gray-200">
+    <nav className="border-b border-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-500">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 font-bold">
         <Link href="/">
         TaskFlow
         </Link>
+        <div className="flex items-center gap-4">
+        <ThemeToggle />
         <LoginStatus />
+        </div>
       </div>
     </nav>
   )
