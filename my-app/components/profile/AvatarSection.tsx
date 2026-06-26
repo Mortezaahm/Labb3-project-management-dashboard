@@ -3,7 +3,7 @@ import { useState , useRef , useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-import Button from "@/components/ui/Button";
+import { ui } from "@/lib/styles"
 
 type AvatarSectionProps = {
   user: {
@@ -73,7 +73,7 @@ export default function AvatarSection({user}: AvatarSectionProps) {
         alt={`${user.name} avatar`}
         width={96}
         height={96}
-        className="border-2 border-amber-500 rounded-full mb-4"
+        className={ui.image}
       />
 
       <input
@@ -95,17 +95,18 @@ export default function AvatarSection({user}: AvatarSectionProps) {
       <button
         type="button"
         onClick={() => fileInputRef.current?.click()}
-        className="mb-4 mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+        className={ui.buttonSecondary}
       >
         Choose Avatar
       </button>
-      <Button
+      <button
+        className={ui.buttonPrimary}
         onClick={handleUpload}
       >
           {loading ? "Changing..." : "Change Avatar" }
-      </Button>
+      </button>
       {message && (
-        <p className="mt-2 text-sm">{message}</p>
+        <p className={ui.messageText}>{message}</p>
       )}
     </>
   )

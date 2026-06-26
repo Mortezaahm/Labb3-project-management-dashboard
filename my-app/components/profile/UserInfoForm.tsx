@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
 import { ui } from "@/lib/styles";
-import Input from "@/components/ui/Input";
-import Button from "../ui/Button";
 
 type UserInfoFormProps = {
     user: {
@@ -57,19 +55,21 @@ export default function UserInfoForm( {user} : UserInfoFormProps) {
             className={ui.label}>
             Name
         </label>
-        <Input
+        <input
             id="name"
             value={name}
             onChange={(e) => {setName(e.target.value)}}
+            className={ui.input}
         />
         <label
             htmlFor="email"
             className={ui.label}>
             Email
         </label>
-        <Input
+        <input
             id="email"
             value={user.email}
+            className={ui.input}
             readOnly
         />
         <label
@@ -83,12 +83,13 @@ export default function UserInfoForm( {user} : UserInfoFormProps) {
             value={bio}
             onChange={(e) => setBio(e.target.value)}
         />
-        <Button
+        <button
             onClick={handleSubmit}
             disabled={loading}
+            className={ui.buttonPrimary}
         >
           {loading ? "Saving..." : "Save Changes"}
-        </Button>
+        </button>
         {message && (
             <p className="mt-2 text-sm">{message}</p>
         )}

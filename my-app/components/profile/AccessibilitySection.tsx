@@ -94,7 +94,7 @@ export default function AccessibilitySection({user}: AccessibilitySectionProps) 
             {loading ? "Saving..." : "Save Changes"}
             </button>
             {message && (
-                <p className={ui.text}>{message}</p>
+                <p className={ui.messageText}>{message}</p>
             )}
         </>
 

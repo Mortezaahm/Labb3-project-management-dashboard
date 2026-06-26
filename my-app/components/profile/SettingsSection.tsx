@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react";
-import Button from "@/components/ui/Button";
 
 import { ui } from "@/lib/styles";
 
@@ -59,7 +58,7 @@ export default function SettingsSection({user}: SettingsSectionProps) {
       <h2 className={ui.subtitle}>Settings</h2>
       <p className={ui.text}>Here you can manage your account settings, privacy preferences, and notification options.</p>
       <p className={ui.text}>Notifications:
-        <span className="font-semibold">
+        <span className="font-semibold ml-2">
           <input
             type="checkbox"
             checked={notifications}
@@ -68,7 +67,7 @@ export default function SettingsSection({user}: SettingsSectionProps) {
           Enabled
         </span>
       </p>
-      <p className={ui.text}>Language: <span className="font-semibold">
+      <p className={ui.text}>Language: <span className="font-semibold ml-2">
           <select
             value={language}
             onChange={(e) => setLanguage(e.target.value as "en" | "sv")}
@@ -78,11 +77,12 @@ export default function SettingsSection({user}: SettingsSectionProps) {
           </select></span>
       </p>
 
-      <Button
+      <button
         onClick={handleSave}
+        className={ui.buttonPrimary}
       >
         {loading ? "Saving..." : "Save Settings"}
-      </Button>
+      </button>
       {message && (
         <p className={ui.text}>{message}</p>
       )}
