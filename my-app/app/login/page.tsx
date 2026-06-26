@@ -28,8 +28,8 @@ export default function Login() {
             })
 
             if (!res.error) {
-                router.refresh()
                 router.push('/dashboard')
+                router.refresh()
             } else {
                 setError(res.error.message ?? 'Login failed')
             }
@@ -48,7 +48,7 @@ export default function Login() {
 
             <div className="flex w-full md:w-1/2 items-center justify-center p-8 bg-gray-100 dark:bg-gray-800">
             <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-                <h2 className="text-center text-3xl font-bold mb-4">Login</h2>
+                <h2 className="text-center text-3xl font-bold mb-4 dark:text-black">Login</h2>
                 <p className="text-center text-gray-600 mb-4">
                     Login to your account to start managing your projects.
                 </p>
@@ -70,7 +70,8 @@ export default function Login() {
                             onChange={(e) => setEmail(e.target.value)}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         />
-                        <div>
+                        </div>
+
                             <div>
                                 <label
                                     htmlFor="password"
@@ -102,7 +103,7 @@ export default function Login() {
                             >
                                 {loading ? 'logging in...' : 'Login'}{' '}
                             </Button>
-                            <p className="text-center mt-2">
+                            <p className="text-center mt-2 dark:text-black">
                                 Not signed up?{' '}
                                 <Link
                                     href="/register"
@@ -111,8 +112,6 @@ export default function Login() {
                                     Register
                                 </Link>{' '}
                             </p>
-                        </div>
-                    </div>
                 </form>
             </div>
          </div>

@@ -10,7 +10,7 @@ import { BookOpen, Zap, CheckCircle } from "lucide-react";
 
 export default async function Home() {
   const session = await getSession()
-  const user = session?.user as User | undefined
+  const user = session?.user
   return (
       <>
         {user ?(

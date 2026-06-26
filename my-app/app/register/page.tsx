@@ -31,15 +31,16 @@ export default function Register() {
       return
     }
 
+    // kolla denna kanske kan lägga till meddelanden om ett konto redan finns etc
+
     try {
       const res = await signUp.email({
         email: validationResult.data.email,
         name: validationResult.data.name,
         password: validationResult.data.password
       })
-
       if (res.error) {
-        setError(res.error.message ?? "Error")
+        setError(res.error.message ?? "Error could not create account, please try again")
       } else {
         router.push("/dashboard")
       }
@@ -59,7 +60,7 @@ export default function Register() {
     <div className="flex w-full md:w-1/2 items-center justify-center p-4 bg-gray-100 dark:bg-gray-800">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
 
-        <h2 className="text-center text-3xl font-bold mb-4">Create a new account </h2>
+        <h2 className="text-center text-3xl font-bold mb-4 dark:text-black">Create a new account </h2>
         <p className="text-center text-gray-600 mb-4">Create a free account to start managing your projects.</p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -68,12 +69,15 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
               value={email}
             required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+            </div>
+
             <div>
               <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Name</label>
               <input type="text" id="name" placeholder="John Doe"
               onChange={(e) => setName(e.target.value)}
               value={name}
               required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+              </div>
 
               <div>
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
@@ -86,10 +90,9 @@ export default function Register() {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  />
               </div>
               {error && <p className="text-red-500 text-sm">{error} </p>}
-              <Button type="submit" disabled={loading} className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4">{loading ? "Creating account ": "Sign up"}</Button>
-              <p className="text-center mt-2">Already have an account?{" "}<Link href="/login" className="text-blue-800">Login</Link> </p>
-            </div>
-          </div>
+              <Button type="submit" disabled={loading} className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4">{loading ? "Creating account...": "Sign up"}</Button>
+              <p className="text-center mt-2 dark:text-black">Already have an account?{" "}<Link href="/login" className="text-blue-800">Login</Link>
+              </p>
         </form>
       </div>
     </div>
