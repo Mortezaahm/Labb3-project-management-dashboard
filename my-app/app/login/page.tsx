@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { signIn } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
+import { Button } from "@/components/button";
+import { SiteImage } from "@/components/image";
 
 export default function Login() {
     const [email, setEmail] = useState<string>('')
@@ -25,10 +27,11 @@ export default function Login() {
                 password
             })
 
-            if (res.error) {
-                setError(res.error.message ?? 'Login failed')
-            } else {
+            if (!res.error) {
                 router.push('/dashboard')
+                router.refresh()
+            } else {
+                setError(res.error.message ?? 'Login failed')
             }
         } catch (error: unknown) {
             setError(
@@ -41,20 +44,11 @@ export default function Login() {
 
     return (
         <div className="flex min-h-screen">
-          <div className="hidden md:flex w-1/2 bg-cover bg-center items-center justify-center"
-          style={{ backgroundImage: "url('/login2.jpg')"
-           }}
-           role="img"
-           aria-label="login image with a notepad, pen and a coffee cup"
-           >
-            <span className="sr-only">
-              Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk
-            </span>
-          </div>
+          <SiteImage src="/login2.jpg" alt="login image with a notepad, pen and a coffee cup" variant="side" credit="Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk" />
 
-            <div className="flex items-center justify-center p-8 bg-gray-100 ">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8 ">
-                <h2 className="text-center text-3xl font-bold mb-4">Login</h2>
+            <div className="flex w-full md:w-1/2 items-center justify-center p-8 bg-gray-100 dark:bg-gray-800">
+            <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+                <h2 className="text-center text-3xl font-bold mb-4 dark:text-black">Login</h2>
                 <p className="text-center text-gray-600 mb-4">
                     Login to your account to start managing your projects.
                 </p>
@@ -74,9 +68,10 @@ export default function Login() {
                             placeholder="John@example.com"
                             required
                             onChange={(e) => setEmail(e.target.value)}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white mb-2 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         />
-                        <div>
+                        </div>
+
                             <div>
                                 <label
                                     htmlFor="password"
@@ -95,20 +90,20 @@ export default function Login() {
                                     onChange={(e) =>
                                         setPassword(e.target.value)
                                     }
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 />
                             </div>
                             {error && (
                                 <p className="text-red-500 text-sm">{error} </p>
                             )}
-                            <button
+                            <Button
                                 type="submit"
-                                className="w-full py-2 px-4 bg-blue-900 text-white font-bold rounded-md shadow  hover:bg-blue-700 transition-colors mt-4 cursor-pointer"
+                                className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4"
                                 disabled={loading}
                             >
                                 {loading ? 'logging in...' : 'Login'}{' '}
-                            </button>
-                            <p className="text-center mt-2">
+                            </Button>
+                            <p className="text-center mt-2 dark:text-black">
                                 Not signed up?{' '}
                                 <Link
                                     href="/register"
@@ -117,8 +112,6 @@ export default function Login() {
                                     Register
                                 </Link>{' '}
                             </p>
-                        </div>
-                    </div>
                 </form>
             </div>
          </div>

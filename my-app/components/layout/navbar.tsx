@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { LoginStatus } from "../loginStatus";
-import ThemeToggle from "@/components/layout/ThemeToggle";
+// import ThemeToggle from "@/components/layout/ThemeToggle";
 import { ui } from "@/lib/styles"
+import ThemeToggle from "./themeToggle";
 
 export default async function Navbar() {
 
@@ -11,8 +12,10 @@ export default async function Navbar() {
         <Link href="/">
         TaskFlow
         </Link>
-        <LoginStatus />
+        <div className="flex items-center gap-4">
         <ThemeToggle />
+        <LoginStatus />
+        </div>
       </div>
     </nav>
   )

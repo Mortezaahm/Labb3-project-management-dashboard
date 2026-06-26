@@ -5,7 +5,9 @@ import { LogoutButton } from "./button";
 import { useSession } from "@/lib/auth-client";
 
 export function LoginStatus() {
-  const { data: session } = useSession()
+  const { data: session, isPending } = useSession()
+
+  if (isPending) return null
 
   return (
     <>
