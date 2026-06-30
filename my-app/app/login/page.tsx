@@ -5,6 +5,7 @@ import { signIn } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
 import { Button } from "@/components/button";
 import { SiteImage } from "@/components/image";
+import Input from "@/components/ui/Input";
 
 export default function Login() {
     const [email, setEmail] = useState<string>('')
@@ -52,7 +53,7 @@ export default function Login() {
                 <p className="text-center text-gray-600 mb-4">
                     Login to your account to start managing your projects.
                 </p>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} >
                     <div>
                         <label
                             htmlFor="email"
@@ -60,7 +61,7 @@ export default function Login() {
                         >
                             Email address
                         </label>
-                        <input
+                        <Input
                             type="email"
                             id="email"
                             name="email"
@@ -68,7 +69,7 @@ export default function Login() {
                             placeholder="John@example.com"
                             required
                             onChange={(e) => setEmail(e.target.value)}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            className="text-sm"
                         />
                         </div>
 
@@ -79,7 +80,7 @@ export default function Login() {
                                 >
                                     Password
                                 </label>
-                                <input
+                                <Input
                                     type="password"
                                     id="password"
                                     value={password}
@@ -90,7 +91,7 @@ export default function Login() {
                                     onChange={(e) =>
                                         setPassword(e.target.value)
                                     }
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    className="text-sm"
                                 />
                             </div>
                             {error && (

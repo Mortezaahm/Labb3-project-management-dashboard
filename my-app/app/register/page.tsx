@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/button";
 import registerSchema from "@/lib/registerSchema";
 import { SiteImage } from "@/components/image";
+import Input from "@/components/ui/Input";
 
 export default function Register() {
   const [name, setName] = useState<string>('');
@@ -62,32 +63,32 @@ export default function Register() {
 
         <h2 className="text-center text-3xl font-bold mb-4 dark:text-black">Create a new account </h2>
         <p className="text-center text-gray-600 mb-4">Create a free account to start managing your projects.</p>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} >
           <div>
             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email address</label>
-            <input type="email" id="email" placeholder="John@example.com"
+            <Input type="email" id="email" placeholder="John@example.com"
             onChange={(e) => setEmail(e.target.value)}
               value={email}
-            required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+            required className="text-sm" />
             </div>
 
             <div>
               <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Name</label>
-              <input type="text" id="name" placeholder="John Doe"
+              <Input type="text" id="name" placeholder="John Doe"
               onChange={(e) => setName(e.target.value)}
               value={name}
-              required className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+              required className="text-sm" />
               </div>
 
               <div>
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                <input type="password" id="password"
+                <Input type="password" id="password"
                 required
                 minLength={8}
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
               value={password}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"  />
+                className="text-sm"  />
               </div>
               {error && <p className="text-red-500 text-sm">{error} </p>}
               <Button type="submit" disabled={loading} className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4">{loading ? "Creating account...": "Sign up"}</Button>
