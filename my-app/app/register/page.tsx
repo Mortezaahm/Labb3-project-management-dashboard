@@ -32,8 +32,6 @@ export default function Register() {
       return
     }
 
-    // kolla denna kanske kan lägga till meddelanden om ett konto redan finns etc
-
     try {
       const res = await signUp.email({
         email: validationResult.data.email,
