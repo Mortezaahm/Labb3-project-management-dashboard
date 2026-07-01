@@ -51,7 +51,7 @@ export function FAQ({ question, answer, id }: FAQProps) {
 export function FAQSection() {
     return (
         <section className="container mx-auto px-4 py-24 max-w-3xl">
-            <h3 className="flex font-bold text-3xl mb-6 text-blue-900 items-center justify-center">
+            <h3 className="flex font-bold text-3xl mb-6 text-blue-900 items-center justify-center dark:text-white">
                 Frequently asked questions
             </h3>
             {faqs.map((faq, index) => (

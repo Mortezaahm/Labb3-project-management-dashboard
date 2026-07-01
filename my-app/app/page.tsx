@@ -1,7 +1,6 @@
 // Our homepage
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
-import { User } from "@/types/types";
 import { Button } from "@/components/button";
 import { SiteImage } from "@/components/image";
 import { CardFeature } from "@/components/card";
@@ -15,14 +14,14 @@ export default async function Home() {
       <>
         {user ?(
                   <section className="container mx-auto px-4 py-32">
-                 <h1 className="text-blue-900 text-center font-bold mb-7 text-4xl">Glad to see you again {user.name}!</h1>
-                 <p className="text-center">Ready to continue managing your projects? Visit <Link href="/dashboard" className="text-blue-800">Dashboard</Link></p>
+                 <h1 className="text-blue-900 text-center font-bold mb-7 text-4xl dark:text-white">Glad to see you again {user.name}!</h1>
+                 <p className="text-center">Ready to continue managing your projects? Visit <Link href="/dashboard" className="text-blue-800 dark:text-blue-400">Dashboard</Link></p>
                  </section>
                   ) : (
                   <>
         <section className="container mx-auto px-4 py-32">
           <div className="text-center mx-auto max-w-4xl">
-            <h1 className="text-blue-900 font-bold mb-7 text-6xl">Project Management, simplified</h1>
+            <h1 className="text-blue-900 font-bold mb-7 text-6xl dark:text-white">Project Management, simplified</h1>
             <p className="text-gray-600 mb-10 text-lg dark:text-gray-300">Organize your work, track your progress, meet deadlines and always stay on top with TaskFlow.</p>
           </div>
 
@@ -44,7 +43,7 @@ export default async function Home() {
 
           <section className="container mx-auto px-4 pt-16">
             <div className="text-center mx-auto max-w-4xl">
-              <h2 className="font-bold text-3xl mb-2 text-blue-900">Everything you need to manage your projects</h2>
+              <h2 className="font-bold text-3xl mb-2 text-blue-900 dark:text-white">Everything you need to manage your projects</h2>
               <p className="text-gray-600 mb-10 text-lg dark:text-gray-300">Stop the endless juggling and focus on what matters most. With TaskFlow, you can easily bring your tasks and deadlines all togheter in one place.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12 max-w-4xl mx-auto px-4">

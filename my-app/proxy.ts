@@ -10,7 +10,7 @@ export function proxy(req: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', req.url))
   }
   // if the user tries to visit the dashboard without a session cookie, we redirect them to the login page
-  if (!session && pathname.startsWith('/dashboard')) {
+  if (!session && (pathname.startsWith('/dashboard') || pathname.startsWith('/projects') || pathname.startsWith('/statistics') || pathname.startsWith('/profile'))) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
   return NextResponse.next()
@@ -18,5 +18,5 @@ export function proxy(req: NextRequest) {
 
 // this is the config for the proxy, it is responsible for when the proxy is triggered
 export const config = {
-  matcher: ['/dashboard/:path*', '/login', '/register'],
+  matcher: ['/dashboard/:path*', '/projects/:path*', '/statistics/:path*', '/profile/:path*', '/login', '/register'],
 }
