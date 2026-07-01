@@ -3,18 +3,23 @@ import { useTheme } from "next-themes"
 import { Sun, Moon } from "lucide-react";
 import {useState, useEffect} from "react"
 export default function ThemeToggle() {
-    const { theme, setTheme } = useTheme()
-    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const { resolvedTheme, setTheme } = useTheme()
+    const [mounted, setMounted] = useState<boolean>(false);
 
-    useEffect(() => { setIsLoaded(true); }, []);
+    useEffect(() => {
+        const id = requestAnimationFrame(() => {
+            setMounted(true)
+        });
+        return () => cancelAnimationFrame(id);
+    },[]);
 
-    if (!isLoaded) { return null; }
+    if (!mounted) { return null; }
 
     return (
         <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
             className="cursor-pointer"
         >
-            {theme === "dark" ? <Sun className="text-white" /> : <Moon className="text-black" />}
+            {resolvedTheme === "dark" ? <Sun className="text-white" /> : <Moon className="text-black" />}
         </button>
     ) }

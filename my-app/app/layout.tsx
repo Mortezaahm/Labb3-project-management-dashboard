@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import { ThemeProvider } from "next-themes";
+import FontSizeProvider from "@/components/providers/FontSizeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,11 +34,13 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="system">
-        <Navbar />
-       <main className="flex-1 dark:bg-gray-800 dark:text-gray-300">
-        {children}
-        </main>
-       <Footer />
+          <FontSizeProvider>
+            <Navbar />
+            <main className="flex-1 dark:bg-gray-800 dark:text-gray-300">
+            {children}
+            </main>
+            <Footer />
+          </FontSizeProvider>
        </ThemeProvider>
        </body>
 
