@@ -1,17 +1,23 @@
 "use client"
 import { useState } from "react";
 import { ui } from "@/lib/styles";
+import { useTheme } from "next-themes";
+import { useFontSize } from "../providers/FontSizeProvider";
 
-type AccessibilitySectionProps = {
-  user: {
-    theme?: "light" | "dark";
-    fontSize?: "small" | "medium" | "large";
-  };
-};
+// type AccessibilitySectionProps = {
+//   user: {
+//     theme?: "light" | "dark";
+//     fontSize?: "small" | "medium" | "large";
+//   };
+// };
 
-export default function AccessibilitySection({user}: AccessibilitySectionProps) {
-    const [theme, setTheme] = useState(user.theme || "light")
-    const [fontSize, setFontSize] = useState(user.fontSize || "medium")
+// {user}: AccessibilitySectionProps
+
+export default function AccessibilitySection() {
+    //const [theme, setTheme] = useState(user.theme || "light")
+    const {theme , setTheme} = useTheme()
+    //const [fontSize, setFontSize] = useState(user.fontSize || "medium")
+    const {fontSize , setFontSize} = useFontSize()
 
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState("")

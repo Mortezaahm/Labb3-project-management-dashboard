@@ -5,29 +5,32 @@ import { createContext, useContext, useEffect, useState } from "react"
 type FontSize = "small" | "medium" | "large";
 
 type FontSizeContextType = {
-    fontSize: FontSize
-    setFontSize: (size: FontSize) => void
+  fontSize: FontSize
+  setFontSize: (size: FontSize) => void
 }
 
 const FontSizeContext = createContext<FontSizeContextType | null>(null);
 
-export default function FontSizeProvider({children}: {children: React.ReactNode;}) {
 
-  const getInitialFontSize = (): FontSize => {
-    if (typeof window === "undefined") {
-        return "medium";
-    }
-  return (
-    (localStorage.getItem("font-size") as FontSize | null) ??
-    "medium"
-  );
-};
+export default function FontSizeProvider({
+  children,
+  initialFontSize = "medium"
+}: {
+  children: React.ReactNode;
+  initialFontSize?: FontSize
+}) {
 
-const [fontSize, setFontSize] = useState(getInitialFontSize);
+  const [fontSize, setFontSize] = useState<FontSize>(initialFontSize);
 
   useEffect(() => {
-    localStorage.setItem("font-size", fontSize);
+    const classes = ["font-small", "font-medium", "font-large"]
+    document.body.classList.remove(...classes);
+
+    document.body.classList.add(`font-${fontSize}`);
+
   }, [fontSize]);
+
+
 
   return (
     <FontSizeContext.Provider
@@ -41,11 +44,15 @@ const [fontSize, setFontSize] = useState(getInitialFontSize);
   );
 }
 
+
 export function useFontSize() {
+
   const context = useContext(FontSizeContext);
 
   if (!context) {
-    throw new Error("useFontSize must be used inside FontSizeProvider");
+    throw new Error(
+      "useFontSize must be used inside FontSizeProvider"
+    );
   }
 
   return context;
