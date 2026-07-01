@@ -2,7 +2,7 @@ import Link from "next/link";
 import { LoginStatus } from "../loginStatus";
 // import ThemeToggle from "@/components/layout/ThemeToggle";
 import { ui } from "@/lib/styles"
-import ThemeToggle from "@/components/layout/ThemeToggle";
+import ThemeToggle from "./ThemeToggle";
 import FontSizeSelector from "./FontSizeSelector";
 
 export default async function Navbar() {
