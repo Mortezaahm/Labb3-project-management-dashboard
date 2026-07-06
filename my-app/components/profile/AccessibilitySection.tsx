@@ -1,8 +1,10 @@
 "use client"
 import { useState } from "react";
 import { ui } from "@/lib/styles";
-import { useTheme } from "next-themes";
-import { useFontSize } from "../providers/FontSizeProvider";
+import { useSettings } from "../providers/SettingsProvider";
+import { useRouter } from "next/navigation";
+// import { useTheme } from "next-themes";
+// import { useFontSize } from "../providers/FontSizeProvider";
 
 // type AccessibilitySectionProps = {
 //   user: {
@@ -15,12 +17,16 @@ import { useFontSize } from "../providers/FontSizeProvider";
 
 export default function AccessibilitySection() {
     //const [theme, setTheme] = useState(user.theme || "light")
-    const {theme , setTheme} = useTheme()
+    // const {theme , setTheme} = useTheme()
     //const [fontSize, setFontSize] = useState(user.fontSize || "medium")
-    const {fontSize , setFontSize} = useFontSize()
+    // const {fontSize , setFontSize} = useFontSize()
+
+    const { theme, fontSize, setTheme, setFontSize } = useSettings()
 
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState("")
+
+    const router = useRouter();
 
     const handleSave = async () => {
         try {
@@ -39,11 +45,13 @@ export default function AccessibilitySection() {
             })
 
             const data = await response.json();
+
             if (!response.ok) {
                 throw new Error(data.message)
             }
 
             setMessage("Updated successfully")
+            router.refresh();
         } catch (error) {
             setMessage(
                 error instanceof Error ? error.message : "Something went wrong"
@@ -56,43 +64,47 @@ export default function AccessibilitySection() {
     return (
         <>
             <h2 className={ui.subtitle}>Accessibility</h2>
-            <p className={ui.text}>Here you can manage your accessibility preferences and customize your experience.</p>
+            <p className={ui.text}>
+                Here you can manage your accessibility preferences and customize your experience.
+            </p>
             <h4 className={ui.subtitle}>Text Size</h4>
             <select
                 value={fontSize}
                 onChange={(e) => setFontSize(e.target.value as "small" | "medium" | "large")}
                 className="border rounded py-2 px-4 mb-4"
             >
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
                 <option value="large">Large</option>
             </select>
 
             <h4 className={ui.subtitle}>Change Theme</h4>
-            <label htmlFor="darkMode" className={ui.label}>
+            <label className={ui.label}>
                 <input
-                    id="darkMode"
                     type="radio"
                     name="theme"
                     value="dark"
                     checked={theme === "dark"}
-                    onChange={(e) => setTheme(e.target.value as "light" | "dark")}
+                    // onChange={(e) => setTheme(e.target.value as "light" | "dark")}
+                    onChange={() => setTheme("dark")}
                     className="m-2"
                 />
                 Dark Mode
             </label>
-            <label htmlFor="lightMode" className={ui.label}>
+
+            <label className={ui.label}>
                 <input
-                    id="lightMode"
                     type="radio"
                     name="theme"
                     value="light"
                     checked={theme === "light"}
-                    onChange={(e) => setTheme(e.target.value as "light" | "dark")}
+                    // onChange={(e) => setTheme(e.target.value as "light" | "dark")}
+                    onChange={() => setTheme("light")}
                     className="m-2"
                 />
                 Light Mode
             </label>
+
             <button
                 onClick={handleSave}
                 disabled={loading}

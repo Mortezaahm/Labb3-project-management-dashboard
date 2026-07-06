@@ -1,9 +1,9 @@
 "use client";
 
-import { useFontSize } from "@/components/providers/FontSizeProvider"
+import { useSettings } from "../providers/SettingsProvider";
 
 export default function FontSizeSelector() {
-  const { fontSize, setFontSize } = useFontSize();
+  const { fontSize, setFontSize } = useSettings();
 
   return (
     <select
