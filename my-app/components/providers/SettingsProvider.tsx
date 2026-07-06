@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, useMemo } from "react";
-import type { Settings, Theme, FontSize, Language } from "@/types/types";
+import type { Settings, Theme, FontSize } from "@/types/types";
 import { settingsStorage } from "@/lib/settings-storage";
 import { useTheme } from "next-themes";
 
@@ -21,40 +21,49 @@ export default function SettingsProvider({
   children: React.ReactNode;
   serverSettings?: Settings | null; // from MongoDB
 }) {
-  const { theme: nextTheme, setTheme: setNextTheme } = useTheme();
+  const { setTheme: setNextTheme } = useTheme();
 
   const [theme, setThemeState] = useState<Theme>("light");
   const [fontSize, setFontSizeState] = useState<FontSize>("medium");
   const [initialized, setInitialized] = useState(false);
 
-  // HYDRATION STRATEGY (core logic)
-  useEffect(() => {
-    if (initialized) return;
+    useEffect(() => {
+        if (serverSettings) {
+            setThemeState(serverSettings.theme);
+            setFontSizeState(serverSettings.fontSize);
+            setNextTheme(serverSettings.theme);
+            setInitialized(true);
+        }
+    }, [serverSettings]);
 
-    const local = settingsStorage.load();
+    useEffect(() => {
+        if (serverSettings) return;
+        if (initialized) return;
 
-    const finalSettings: Settings = serverSettings ?? {
-          theme: (local?.theme as Theme) ?? "light",
-          fontSize: (local?.fontSize as FontSize) ?? "medium",
-          language: (local?.language as Language) ?? "en",
-          notifications: (local?.notifications as boolean) ?? true,
-        };
+        const local = settingsStorage.load();
 
-    setThemeState(finalSettings.theme);
-    setFontSizeState(finalSettings.fontSize);
+        const theme = (local?.theme as Theme) ?? "light";
+        const fontSize = (local?.fontSize as FontSize) ?? "medium";
 
-    setNextTheme(finalSettings.theme);
-    setInitialized(true);
-  }, [initialized, serverSettings, setNextTheme]);
+        setThemeState(theme);
+        setFontSizeState(fontSize);
+        setNextTheme(theme);
 
-  // persist only when user interacts (not initial hydrate)
+        setInitialized(true);
+    }, [serverSettings, initialized, setNextTheme]);
+
   useEffect(() => {
     if (!initialized) return;
 
-    if (!serverSettings) {
-      settingsStorage.save({ theme, fontSize, language: "en", notifications: true });
-    }
-  }, [theme, fontSize, initialized, serverSettings]);
+    if (serverSettings) return
+
+    settingsStorage.save({
+        theme,
+        fontSize,
+        language: "en",
+        notifications: true
+    })
+},[theme, fontSize, initialized, serverSettings])
 
   // body class sync
   useEffect(() => {
