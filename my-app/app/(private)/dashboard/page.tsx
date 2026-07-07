@@ -1,8 +1,42 @@
-export default function DashboardPage() {
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
+import StatsCard from "@/components/dashboard/StatsCard";
+import RecentProjects from "@/components/dashboard/RecentProjects";
+import ProjectSummary from "@/components/dashboard/ProjectSummary";
+import QuickAction from "@/components/dashboard/QuickAction";
+
+import { dashboardStats, recentProjects, projectSummary, quickActions } from "@/data/dashboard";
+
+export default async function DashboardPage() {
+
+  const session = await auth.api.getSession({
+    headers: await headers()
+  })
+
+
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
-      <p className="text-gray-600">Welcome to your dashboard! Here you can get an overview of your activities, recent projects, and important statistics at a glance.</p>
+
+      <DashboardHeader userName = {session?.user?.name ?? "User"}/>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        {dashboardStats.map((stat) =>
+          <StatsCard
+            key={stat.title}
+            title={stat.title}
+            value={stat.value}
+          />
+        )}
+      </div>
+
+      <ProjectSummary summary={projectSummary}/>
+
+      <QuickAction actions={quickActions} />
+
+      <RecentProjects
+        projects={recentProjects}
+      />
     </div>
   );
 }
