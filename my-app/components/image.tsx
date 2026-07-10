@@ -10,7 +10,7 @@ interface ImageProps {
 export function SiteImage({ src, alt, credit, variant = "side" } : ImageProps) {
   if ( variant === "center") {
     return (
-      <div className="flex justify-center items-center w-full min-h-[60vh]">
+      <div className="flex justify-center items-center w-full lg:min-h-[60vh]">
         <Image src={src} alt={alt} width={650} height={350} className="rounded-xl shadow-2xl border-gray-100 dark:border-gray-700" style={{width: "auto", height: "auto"}} priority />
 
         {credit && <span className="sr-only">{credit} </span >}

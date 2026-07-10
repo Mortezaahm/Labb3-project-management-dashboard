@@ -41,7 +41,7 @@ export default async function Home() {
           </div>
           </section>
 
-          <section className="container mx-auto px-4 pt-16">
+          <section className="container mx-auto px-4 md:pt-16">
             <div className="text-center mx-auto max-w-4xl">
               <h2 className="font-bold text-3xl mb-2 text-blue-900 dark:text-white">Everything you need to manage your projects</h2>
               <p className="text-gray-600 mb-10 text-lg dark:text-gray-300">Stop the endless juggling and focus on what matters most. With TaskFlow, you can easily bring your tasks and deadlines all togheter in one place.</p>
@@ -55,8 +55,8 @@ export default async function Home() {
 
             <FAQSection />
             <section className="container mx-auto px-4 pt-8 pb-24 max-w-4xl">
-            <div className="flex flex-col items-center justify-center gap-4 bg-gray-600 text-white rounded-xl shadow-xl py-10">
-              <h3 className=" text-3xl mb-2 text-white">Start managing your projects today!</h3>
+            <div className="flex flex-col items-center justify-center gap-4 bg-gray-600 text-white rounded-xl shadow-xl py-10 px-6 sm:px-0 text-center">
+              <h3 className="text-3xl mb-2 text-white">Start managing your projects today!</h3>
               <Link href="/register">
               <Button className="bg-black">Join Now</Button>
             </Link>
