@@ -14,6 +14,12 @@ const db = client.db('Nextjs-Lab3')
 
 export const auth = betterAuth({
     database: mongodbAdapter(db, {client}),
+
+  // Just to test from my mobile
+  trustedOrigins: [
+    "http://localhost:3000",
+    "http://192.168.10.102:3000",
+  ],
     // makes sure that user can sign in with email and password
     emailAndPassword: {
     enabled: true,

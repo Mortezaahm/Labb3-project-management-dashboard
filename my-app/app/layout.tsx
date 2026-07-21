@@ -38,7 +38,7 @@ export default async function RootLayout({children}:
         <ThemeProvider>
           <SettingsProvider serverSettings={settings} >
             <Navbar />
-            <main className="flex-1 dark:bg-gray-800 dark:text-gray-300">
+            <main className="flex-1 min-w-0 dark:bg-gray-800 dark:text-gray-300">
             {children}
             </main>
             <Footer />
