@@ -1,18 +1,13 @@
 "use client";
 import Link from "next/link";
 import { X } from "lucide-react";
+import { navItems } from "@/data/navigation"
+import { LogoutButton } from "../button";
 
 interface MobileDrawerProps {
     open: boolean
     onClose: () => void
 }
-
-const navItems = [
-  { label: "Dashboard", href: "/dashboard" },
-  { label: "Projects", href: "/projects" },
-  { label: "Statistics", href: "/statistics" },
-  { label: "Profile", href: "/profile" },
-];
 
 export default function MobileDrawer({
   open,
@@ -61,15 +56,7 @@ export default function MobileDrawer({
         </nav>
 
         {/* Logout */}
-        <div className="border-t p-4 dark:border-gray-700">
-          <Link
-            href="/"
-            onClick={onClose}
-            className="block rounded px-3 py-2 text-red-600 hover:bg-red-100"
-          >
-            Log out
-          </Link>
-        </div>
+       <LogoutButton />
       </aside>
     </>
   );

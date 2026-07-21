@@ -1,11 +1,5 @@
 import Link from "next/link"
-
- const navItems = [
-    {label: "Dashboard", href: "/dashboard"},
-    {label: "Projects", href: "/projects"},
-    {label: "Statistics", href: "/statistics"},
-    {label: "Profile", href: "/profile"},
- ]
+import { navItems } from "@/data/navigation"
 
  export default function Sidebar() {
   return (
