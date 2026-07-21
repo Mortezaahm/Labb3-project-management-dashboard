@@ -1,5 +1,6 @@
 import { projectHistory } from '@/data/statistics'
 import { progressionBarColor } from '@/utils/progressionBar'
+import { getMonthlyProjects } from '@/utils/statisticsCalc'
 
 interface CompletionRateProps {
     completedProjects: number
@@ -10,15 +11,8 @@ export function CompletionRate({
     completedProjects,
     totalProjects
 }: CompletionRateProps) {
-    // Gets the first day of the month
-    const today = new Date()
-    const firstOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
-
     // Gets the projects completed in the active month
-    const monthlyProjects = projectHistory.filter(
-        (project) =>
-            project.completedAt && new Date(project.completedAt) >= firstOfMonth
-    )
+    const monthlyProjects = getMonthlyProjects(projectHistory)
     // Completed projects in the active month
     const monthlyCompleted = monthlyProjects.filter(
         (project) => project.status === 'Completed'
@@ -27,12 +21,10 @@ export function CompletionRate({
     // Monthly completion percentage
     const monthlyCompletionRate =
         monthlyProjects.length > 0
-            ? Math.round(
-                  (monthlyCompleted / monthlyProjects.length) * 100
-              )
+            ? Math.round((monthlyCompleted / monthlyProjects.length) * 100)
             : 0
 
-          // Calculates the all time completion rate
+    // Calculates the all time completion rate
     const allTimeCompletionRate =
         totalProjects > 0
             ? Math.round((completedProjects / totalProjects) * 100)
@@ -52,7 +44,9 @@ export function CompletionRate({
                     style={{ width: `${allTimeCompletionRate}%` }}
                 />
             </div>
-            <p className="mt-4">Monthly completion rate {monthlyCompletionRate}%</p>
+            <p className="mt-4">
+                Monthly completion rate {monthlyCompletionRate}%
+            </p>
             <div className="w-full bg-gray-200 rounded-full mt-4">
                 <div
                     className={`${progressionBarColor(monthlyCompletionRate, 'completion')} h-3 rounded-full`}

@@ -1,5 +1,6 @@
 import { projectHistory } from '@/data/statistics'
 import { progressionBarColor } from '@/utils/progressionBar'
+import { getMonthlyProjects } from '@/utils/statisticsCalc'
 
 interface OverdueRateProps {
     overdueProjects: number
@@ -10,10 +11,6 @@ export function OverdueRate({
     overdueProjects,
     totalProjects
 }: OverdueRateProps) {
-    // Gets the first day of the month
-    const today = new Date()
-    const firstOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
-
     // Calculates the all time overdue rate
     const allTimeOverdueRate =
         totalProjects > 0
@@ -21,10 +18,7 @@ export function OverdueRate({
             : 0
 
     // Gets the projects completed in the active month
-    const monthlyProjects = projectHistory.filter(
-        (project) =>
-            project.completedAt && new Date(project.completedAt) >= firstOfMonth
-    )
+    const monthlyProjects = getMonthlyProjects(projectHistory)
     // Completed projects that were overdue this month
     const monthlyOverdue = monthlyProjects.filter(
         (project) => project.wasOverdue
