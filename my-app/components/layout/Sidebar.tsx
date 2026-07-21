@@ -9,7 +9,7 @@ import Link from "next/link"
 
  export default function Sidebar() {
   return (
-    <aside className="w-60 border-r hidden md:block">
+    <aside className="hidden md:flex md:w-60 md:flex-col border-r">
       <nav className="flex-1 px-4 py-6 space-y-2">
         {navItems.map((item) => (
           <Link
