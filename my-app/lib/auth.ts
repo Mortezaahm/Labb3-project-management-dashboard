@@ -18,7 +18,6 @@ const client = new MongoClient(MONGODB_URI)
 const db = client.db('projectmanager')
 
 export const auth = betterAuth({
-<<<<<<< HEAD
     database: mongodbAdapter(db, {client}),
 
   // Just to test from my mobile
@@ -26,9 +25,6 @@ export const auth = betterAuth({
     "http://localhost:3000",
     "http://192.168.10.102:3000",
   ],
-=======
-    database: mongodbAdapter(db, { client }),
->>>>>>> dev
     // makes sure that user can sign in with email and password
     emailAndPassword: {
         enabled: true
