@@ -9,7 +9,12 @@ const registerSchema = z.object({
             /^[a-zA-Z\s'\-\.]+$/,
             'Name can only contain letters, spaces, hyphens, apostrophes and periods'
         )
-        .transform((name) => name.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')),
+        .transform((name) =>
+            name
+                .split(' ')
+                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(' ')
+        ),
     email: z.email({ message: 'Invalid email' }),
     password: z.string().min(8, 'Must be at least 8 characters long')
 })
