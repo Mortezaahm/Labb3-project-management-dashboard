@@ -3,8 +3,9 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { signIn } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
-import { Button } from "@/components/button";
-import { SiteImage } from "@/components/image";
+import { Button } from '@/components/button'
+import { SiteImage } from '@/components/Image'
+import Input from '@/components/ui/Input'
 
 export default function Login() {
     const [email, setEmail] = useState<string>('')
@@ -44,77 +45,79 @@ export default function Login() {
 
     return (
         <div className="flex min-h-screen">
-          <SiteImage src="/login2.jpg" alt="login image with a notepad, pen and a coffee cup" variant="side" credit="Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk" />
+            <SiteImage
+                src="/login2.jpg"
+                alt="login image with a notepad, pen and a coffee cup"
+                variant="side"
+                credit="Photo by Alphabag on Unsplash: https://unsplash.com/photos/a-cup-of-coffee-and-a-notepad-on-a-desk-t6sQLEUxqpk"
+            />
 
             <div className="flex w-full md:w-1/2 items-center justify-center p-8 bg-gray-100 dark:bg-gray-800">
-            <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-                <h2 className="text-center text-3xl font-bold mb-4 dark:text-black">Login</h2>
-                <p className="text-center text-gray-600 mb-4">
-                    Login to your account to start managing your projects.
-                </p>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label
-                            htmlFor="email"
-                            className="block mb-2 text-sm font-medium text-gray-900"
-                        >
-                            Email address
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={email}
-                            placeholder="John@example.com"
-                            required
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        />
+                <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
+                    <h2 className="text-center text-3xl font-bold mb-4 dark:text-black">
+                        Login
+                    </h2>
+                    <p className="text-center text-gray-600 mb-4">
+                        Login to your account to start managing your projects.
+                    </p>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label
+                                htmlFor="email"
+                                className="block mb-2 text-sm font-medium text-gray-900"
+                            >
+                                Email address
+                            </label>
+                            <Input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value={email}
+                                placeholder="John@example.com"
+                                required
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="text-sm"
+                            />
                         </div>
 
-                            <div>
-                                <label
-                                    htmlFor="password"
-                                    className="block mb-2 text-sm font-medium text-gray-900"
-                                >
-                                    Password
-                                </label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    value={password}
-                                    required
-                                    minLength={8}
-                                    name="password"
-                                    placeholder="Password"
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                />
-                            </div>
-                            {error && (
-                                <p className="text-red-500 text-sm">{error} </p>
-                            )}
-                            <Button
-                                type="submit"
-                                className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4"
-                                disabled={loading}
+                        <div>
+                            <label
+                                htmlFor="password"
+                                className="block mb-2 text-sm font-medium text-gray-900"
                             >
-                                {loading ? 'logging in...' : 'Login'}{' '}
-                            </Button>
-                            <p className="text-center mt-2 dark:text-black">
-                                Not signed up?{' '}
-                                <Link
-                                    href="/register"
-                                    className="text-blue-800"
-                                >
-                                    Register
-                                </Link>{' '}
-                            </p>
-                </form>
+                                Password
+                            </label>
+                            <Input
+                                type="password"
+                                id="password"
+                                value={password}
+                                required
+                                minLength={8}
+                                name="password"
+                                placeholder="Password"
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="text-sm"
+                            />
+                        </div>
+                        {error && (
+                            <p className="text-red-500 text-sm">{error} </p>
+                        )}
+                        <Button
+                            type="submit"
+                            className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4"
+                            disabled={loading}
+                        >
+                            {loading ? 'logging in...' : 'Login'}{' '}
+                        </Button>
+                        <p className="text-center mt-2 dark:text-black">
+                            Not signed up?{' '}
+                            <Link href="/register" className="text-blue-800">
+                                Register
+                            </Link>{' '}
+                        </p>
+                    </form>
+                </div>
             </div>
-         </div>
-      </div>
+        </div>
     )
 }
