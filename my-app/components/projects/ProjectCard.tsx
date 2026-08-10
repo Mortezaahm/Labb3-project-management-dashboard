@@ -2,9 +2,16 @@ import Link from 'next/link';
 import Card from '@/components/ui/Card';
 import { StatusBadge } from './StatusBadge';
 import { PriorityBadge } from './PriorityBadge';
+import { DeleteProjectButton } from './DeleteProjectButton';
 import type { Project } from '@/types/project';
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  onDelete,
+}: {
+  project: Project;
+  onDelete: (id: string) => void | Promise<void>;
+}) {
   return (
     <Card className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
@@ -33,6 +40,7 @@ export function ProjectCard({ project }: { project: Project }) {
         >
           Edit
         </Link>
+        <DeleteProjectButton onConfirmDelete={() => onDelete(project._id)} />
       </div>
     </Card>
   );

@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useProjects } from '@/hooks/useProjects';
 import { ProjectCard } from '@/components/projects/ProjectCard';
-import { SearchBar } from '@/components/projects/SearchBar';
-import { FilterSelect } from '@/components/projects/FilterSelect';
-import { SortSelect, type SortOption } from '@/components/projects/SortSelect';
+import {
+  ProjectFilters,
+  type SortOption,
+} from '@/components/projects/ProjectFilters';
 import { Pagination } from '@/components/projects/Pagination';
 import type { ProjectStatus } from '@/types/project';
 import Link from 'next/link';
@@ -14,7 +15,7 @@ const priorityWeight = { Low: 1, Medium: 2, High: 3 };
 const PAGE_SIZE = 6;
 
 export default function ProjectsPage() {
-  const { projects, loading, error } = useProjects();
+  const { projects, loading, error, deleteProject } = useProjects();
 
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<ProjectStatus | 'All'>(
@@ -55,6 +56,13 @@ export default function ProjectsPage() {
     setPage(1);
   }, [search, statusFilter, sortOption]);
 
+  const handleDelete = useCallback(
+    async (id: string) => {
+      await deleteProject(id);
+    },
+    [deleteProject],
+  );
+
   const totalPages = Math.max(
     1,
     Math.ceil(filteredProjects.length / PAGE_SIZE),
@@ -77,16 +85,21 @@ export default function ProjectsPage() {
         New Project
       </Link>
 
-      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <div className="flex-1">
-          <SearchBar value={search} onChange={setSearch} />
-        </div>
-        <FilterSelect value={statusFilter} onChange={setStatusFilter} />
-        <SortSelect value={sortOption} onChange={setSortOption} />
-      </div>
+      <ProjectFilters
+        search={search}
+        onSearchChange={setSearch}
+        statusFilter={statusFilter}
+        onStatusFilterChange={setStatusFilter}
+        sortOption={sortOption}
+        onSortChange={setSortOption}
+      />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {pagedProjects.map((project) => (
-          <ProjectCard key={project._id} project={project} />
+          <ProjectCard
+            key={project._id}
+            project={project}
+            onDelete={handleDelete}
+          />
         ))}
       </div>
       <Pagination

@@ -5,8 +5,8 @@ import Input from '@/components/ui/Input';
 import { StatusSelect } from './StatusSelect';
 import { PrioritySelect } from './PrioritySelect';
 import { DeadlineField } from './DeadlineField';
-import { FormActions } from './FormActions';
-import { FormError } from './FormError';
+import { FormControls } from './FormControls';
+
 import type {
   Project,
   ProjectInput,
@@ -85,8 +85,8 @@ export function ProjectForm({
       <StatusSelect value={status} onChange={setStatus} />
       <PrioritySelect value={priority} onChange={setPriority} />
       <DeadlineField value={deadline} onChange={setDeadline} />
-      <FormError message={error} />
-      <FormActions
+      <FormControls
+        error={error}
         submitLabel={mode === 'create' ? 'Create Project' : 'Save Changes'}
         loading={loading}
         onCancel={onCancel}
