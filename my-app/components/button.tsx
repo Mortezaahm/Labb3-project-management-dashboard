@@ -45,7 +45,7 @@ export function Button({
 }
 // Primary:#2563EB Success:#22C55E Warning:#F59E0B Danger:#EF4444
 
-export function LogoutButton() {
+export function LogoutButton({ className = "" }: { className?: string }) {
     const router = useRouter()
     const handleLogout = async (): Promise<void> => {
         try {
@@ -58,8 +58,8 @@ export function LogoutButton() {
     return (
         <Button
             variant="danger"
-            size="sm"
-            className="font-normal"
+            // size="sm"
+            className={className}
             onClick={handleLogout}
         >
             Logout
