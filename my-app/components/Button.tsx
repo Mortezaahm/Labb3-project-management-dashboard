@@ -25,7 +25,7 @@ export function Button({
         primary: 'bg-[#2563EB] text-white hover:bg-[#1E3A8A]',
         success: 'bg-[#22C55E] text-white hover:bg-[#16A34A]',
         warning: 'bg-[#F59E0B] text-white hover:bg-[#E67F0D]',
-        danger: 'bg-[#EF4444] text-white hover:bg-[#E33A3A]'
+        danger: 'bg-[#DC2626] text-white hover:bg-[#B91C1C]'
     }
     const sizeStyles: Record<ButtonSize, string> = {
         sm: 'px-2 py-0.5',

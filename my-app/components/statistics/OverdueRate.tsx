@@ -36,14 +36,28 @@ export function OverdueRate({
             <p>
                 {overdueProjects} of {totalProjects} projects overdue
             </p>
-            <div className="w-full bg-gray-200 rounded-full mt-4">
+            <div
+                className="w-full bg-gray-200 rounded-full mt-4"
+                role="progressbar"
+                aria-valuenow={allTimeOverdueRate}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="All time overdue rate"
+            >
                 <div
                     className={`${progressionBarColor(allTimeOverdueRate, 'overdue')} h-3 rounded-full`}
                     style={{ width: `${allTimeOverdueRate}%` }}
                 />
             </div>
             <p className="mt-4">Monthly overdue rate {monthlyRate}%</p>
-            <div className="w-full bg-gray-200 rounded-full mt-4">
+            <div
+                className="w-full bg-gray-200 rounded-full mt-4"
+                role="progressbar"
+                aria-valuenow={monthlyRate}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Monthly overdue rate"
+            >
                 <div
                     className={`${progressionBarColor(monthlyRate, 'overdue')} h-3 rounded-full`}
                     style={{ width: `${monthlyRate}%` }}

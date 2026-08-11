@@ -38,7 +38,14 @@ export function CompletionRate({
                 {completedProjects} of {totalProjects} projects completed
             </p>
 
-            <div className="w-full bg-gray-200 rounded-full mt-4">
+            <div
+                className="w-full bg-gray-200 rounded-full mt-4"
+                role="progressbar"
+                aria-valuenow={allTimeCompletionRate}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="All time completion rate"
+            >
                 <div
                     className={`${progressionBarColor(allTimeCompletionRate, 'completion')} h-3 rounded-full`}
                     style={{ width: `${allTimeCompletionRate}%` }}
@@ -47,7 +54,14 @@ export function CompletionRate({
             <p className="mt-4">
                 Monthly completion rate {monthlyCompletionRate}%
             </p>
-            <div className="w-full bg-gray-200 rounded-full mt-4">
+            <div
+                className="w-full bg-gray-200 rounded-full mt-4"
+                role="progressbar"
+                aria-valuenow={monthlyCompletionRate}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Monthly completion rate"
+            >
                 <div
                     className={`${progressionBarColor(monthlyCompletionRate, 'completion')} h-3 rounded-full`}
                     style={{ width: `${monthlyCompletionRate}%` }}

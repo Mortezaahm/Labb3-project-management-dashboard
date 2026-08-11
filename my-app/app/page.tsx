@@ -1,9 +1,9 @@
 // Our homepage
 import Link from 'next/link'
 import { getSession } from '@/lib/auth'
-import { Button } from '@/components/button'
+import { Button } from '@/components/Button'
 import { SiteImage } from '@/components/Image'
-import { CardFeature } from '@/components/card'
+import { CardFeature } from '@/components/Card'
 import { FAQSection } from '@/components/Question'
 import { BookOpen, Zap, CheckCircle } from 'lucide-react'
 
@@ -21,7 +21,7 @@ export default async function Home() {
                         Ready to continue managing your projects? Visit{' '}
                         <Link
                             href="/dashboard"
-                            className="text-blue-800 dark:text-blue-400"
+                            className="font-bold underline text-blue-800 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300"
                         >
                             Dashboard
                         </Link>
@@ -59,7 +59,7 @@ export default async function Home() {
                         <div className="mt-10 max-w-4xl mx-auto px-4">
                             <SiteImage
                                 src="/dashboard-test-2.jpg"
-                                alt="Illustration 1"
+                                alt="Image that illustrates the dashboard of the project management application"
                                 variant="center"
                             />
                         </div>
@@ -73,7 +73,7 @@ export default async function Home() {
                             <p className="text-gray-600 mb-10 text-lg dark:text-gray-300">
                                 Stop the endless juggling and focus on what
                                 matters most. With TaskFlow, you can easily
-                                bring your tasks and deadlines all togheter in
+                                bring your tasks and deadlines all together in
                                 one place.
                             </p>
                         </div>
@@ -99,9 +99,9 @@ export default async function Home() {
                     <FAQSection />
                     <section className="container mx-auto px-4 pt-8 pb-24 max-w-4xl">
                         <div className="flex flex-col items-center justify-center gap-4 bg-gray-600 text-white rounded-xl shadow-xl py-10 px-6 sm:px-0 text-center">
-                            <h3 className="text-3xl mb-2 text-white">
+                            <h2 className="text-3xl mb-2 text-white">
                                 Start managing your projects today!
-                            </h3>
+                            </h2>
                             <Link href="/register">
                                 <Button className="bg-black">Join Now</Button>
                             </Link>
