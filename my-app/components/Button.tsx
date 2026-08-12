@@ -25,7 +25,7 @@ export function Button({
         primary: 'bg-[#2563EB] text-white hover:bg-[#1E3A8A]',
         success: 'bg-[#22C55E] text-white hover:bg-[#16A34A]',
         warning: 'bg-[#F59E0B] text-white hover:bg-[#E67F0D]',
-        danger: 'bg-[#EF4444] text-white hover:bg-[#E33A3A]'
+        danger: 'bg-[#881337] text-white hover:bg-[#ad1414] dark:bg-[#d9383a] dark:hover:bg-[#ef4444]'
     }
     const sizeStyles: Record<ButtonSize, string> = {
         sm: 'px-2 py-0.5',
@@ -43,7 +43,7 @@ export function Button({
         </button>
     )
 }
-// Primary:#2563EB Success:#22C55E Warning:#F59E0B Danger:#EF4444
+// Primary:#2563EB Success:#22C55E Warning:#F59E0B Danger:#881337
 
 export function LogoutButton() {
     const router = useRouter()

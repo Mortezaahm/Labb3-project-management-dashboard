@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { LoginStatus } from '../LoginStatus'
-// import ThemeToggle from "@/components/layout/ThemeToggle";
 import { ui } from '@/lib/styles'
 import ThemeToggle from './ThemeToggle'
 import FontSizeSelector from './FontSizeSelector'

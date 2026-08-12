@@ -30,15 +30,17 @@ export function FAQ({ question, answer, id }: FAQProps) {
 
     return (
         <div className="border border-gray-300 rounded-lg p-4 my-2 shadow-md">
-            <button
-                onClick={() => setIsOpen((prev) => !prev)}
-                aria-expanded={isOpen}
-                aria-controls={answerId}
-                className="flex items-center justify-between w-full cursor-pointer overflow-hidden"
-            >
-                <span className="font-bold text-left">{question}</span>
-                {isOpen ? <Minus size={18} /> : <Plus size={18} />}
-            </button>
+            <h3 className="m-0 p-0 font-normal">
+                <button
+                    onClick={() => setIsOpen((prev) => !prev)}
+                    aria-expanded={isOpen}
+                    aria-controls={answerId}
+                    className="flex items-center justify-between w-full cursor-pointer overflow-hidden"
+                >
+                    <span className="font-bold text-left">{question}</span>
+                    {isOpen ? <Minus size={18} /> : <Plus size={18} />}
+                </button>
+            </h3>
             {isOpen && (
                 <p
                     id={answerId}
@@ -54,9 +56,9 @@ export function FAQ({ question, answer, id }: FAQProps) {
 export function FAQSection() {
     return (
         <section className="container mx-auto px-4 py-24 max-w-3xl">
-            <h3 className="flex font-bold text-3xl mb-6 text-blue-900 items-center justify-center dark:text-white">
+            <h2 className="flex font-bold text-3xl mb-6 text-blue-900 items-center justify-center dark:text-white">
                 Frequently asked questions
-            </h3>
+            </h2>
             {faqs.map((faq, index) => (
                 <FAQ
                     key={index}
