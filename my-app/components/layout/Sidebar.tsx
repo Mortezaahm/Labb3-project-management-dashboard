@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { navItems } from "@/data/navigation"
+import { LogoutButton } from "@/components/Button"
 
  export default function Sidebar() {
   return (
@@ -9,7 +10,7 @@ import { navItems } from "@/data/navigation"
           <Link
             key={item.href}
             href={item.href}
-            className="block px-3 py-2 rounded hover:bg-blue-200 transition"
+            className="block px-3 py-2 rounded-lg hover:bg-blue-200 transition"
           >
             {item.label}
           </Link>
@@ -17,11 +18,8 @@ import { navItems } from "@/data/navigation"
       </nav>
 
       {/* Logout */}
-      {/* TODO: Replace with real logout functionality */}
       <div className="p-4 border-t">
-        <Link href="/" className="block w-full text-left px-3 py-2 rounded hover:bg-red-100 text-red-600 transition">
-            Log out
-        </Link>
+        <LogoutButton  className="w-full text-left bg-transparent px-3 py-2 text-red-600 shadow-none hover:bg-red-700" />
       </div>
     </aside>
   );

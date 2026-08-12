@@ -15,7 +15,7 @@ const client = new MongoClient(MONGODB_URI)
 // you can change the database name if you want, but make sure to update it in the .env.local file as well
 // morteza db name is : "Nextjs-Lab3"
 // leon db name is : "projectmanager"
-const db = client.db('projectmanager')
+const db = client.db('Nextjs-Lab3')
 
 export const auth = betterAuth({
     database: mongodbAdapter(db, {client}),

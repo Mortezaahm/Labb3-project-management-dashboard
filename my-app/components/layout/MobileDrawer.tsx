@@ -53,7 +53,7 @@ export default function MobileDrawer({ open, onClose }: MobileDrawerProps) {
                 </nav>
 
                 {/* Logout */}
-                <LogoutButton />
+                <LogoutButton className='block text-left bg-transparent m-2 px-3 py-2 text-red-600 shadow-none hover:bg-red-700'/>
             </aside>
         </>
     )
