@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { signIn } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/button'
+import { Button } from '@/components/Button'
 import { SiteImage } from '@/components/Image'
 import Input from '@/components/ui/Input'
 
@@ -54,9 +54,9 @@ export default function Login() {
 
             <div className="flex w-full md:w-1/2 items-center justify-center p-8 bg-gray-100 dark:bg-gray-800">
                 <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-8">
-                    <h2 className="text-center text-3xl font-bold mb-4 dark:text-black">
+                    <h1 className="text-center text-3xl font-bold mb-4 dark:text-black">
                         Login
-                    </h2>
+                    </h1>
                     <p className="text-center text-gray-600 mb-4">
                         Login to your account to start managing your projects.
                     </p>

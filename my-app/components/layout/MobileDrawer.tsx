@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { X } from "lucide-react";
 import { navItems } from "@/data/navigation"
-import { LogoutButton } from "../button";
+import { LogoutButton } from "../Button";
 
 interface MobileDrawerProps {
     open: boolean

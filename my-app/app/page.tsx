@@ -1,9 +1,9 @@
 // Our homepage
 import Link from 'next/link'
 import { getSession } from '@/lib/auth'
-import { Button } from '@/components/button'
+import { Button } from '@/components/Button'
 import { SiteImage } from '@/components/Image'
-import { CardFeature } from '@/components/card'
+import { CardFeature } from '@/components/Card'
 import { FAQSection } from '@/components/Question'
 import { BookOpen, Zap, CheckCircle } from 'lucide-react'
 

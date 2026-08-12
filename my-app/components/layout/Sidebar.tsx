@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { navItems } from "@/data/navigation"
-import { LogoutButton } from "@/components/button"
+import { LogoutButton } from "@/components/Button"
 
  export default function Sidebar() {
   return (

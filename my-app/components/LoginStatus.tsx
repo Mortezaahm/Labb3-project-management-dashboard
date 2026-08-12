@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { LogoutButton } from './button'
+import { LogoutButton } from './Button'
 import { useSession } from '@/lib/auth-client'
 
 export function LoginStatus() {
