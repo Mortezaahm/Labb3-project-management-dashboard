@@ -29,7 +29,7 @@ export default async function Home() {
                 </section>
             ) : (
                 <>
-                    <section className="container mx-auto px-4 py-32">
+                    <section className="container mx-auto px-4 pt-32 pb-16">
                         <div className="text-center mx-auto max-w-4xl">
                             <h1 className="text-blue-900 font-bold mb-7 text-6xl dark:text-white">
                                 Project Management, simplified
@@ -56,16 +56,16 @@ export default async function Home() {
                                 today.
                             </p>
                         </div>
-                        <div className="mt-10 max-w-4xl mx-auto px-4">
+                        <div className="mt-20 max-w-4xl mx-auto px-4">
                             <SiteImage
-                                src="/dashboard-test-2.jpg"
+                                src="/dashboard6.png"
                                 alt="Image that illustrates the dashboard of the project management application"
                                 variant="center"
                             />
                         </div>
                     </section>
 
-                    <section className="container mx-auto px-4 md:pt-16">
+                    <section className="container mx-auto px-4">
                         <div className="text-center mx-auto max-w-4xl">
                             <h2 className="font-bold text-3xl mb-2 text-blue-900 dark:text-white">
                                 Everything you need to manage your projects
