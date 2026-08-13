@@ -10,7 +10,7 @@ import { LogoutButton } from "@/components/Button"
           <Link
             key={item.href}
             href={item.href}
-            className="block px-3 py-2 rounded-lg hover:bg-blue-200 transition"
+            className="block px-3 py-2 rounded-lg hover:bg-blue-200 hover:text-blue-900 transition"
           >
             {item.label}
           </Link>
@@ -19,7 +19,7 @@ import { LogoutButton } from "@/components/Button"
 
       {/* Logout */}
       <div className="p-4 border-t">
-        <LogoutButton  className="w-full text-left bg-transparent px-3 py-2 text-red-600 shadow-none hover:bg-red-700" />
+        <LogoutButton  className="w-full text-left px-3 py-2 text-red-600 shadow-none hover:bg-red-700" />
       </div>
     </aside>
   );
