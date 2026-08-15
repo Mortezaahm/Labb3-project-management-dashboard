@@ -8,30 +8,35 @@ import { useSettings } from '@/components/providers/SettingsProvider';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const statusColors: Record<string, string> = {
-  Pending: '#d946ef',
-  'In Progress': '#3b82f6',
-  Completed: '#22c55e',
-};
-
-export function ProjectStatusChart() {
+export function DeadlineUrgencyChart() {
   const { projects, loading } = useProjects();
   const { theme } = useSettings();
   const textColor = theme === 'dark' ? '#f8fafc' : '#171717';
 
   const chartData = useMemo(() => {
-    const counts = { Pending: 0, 'In Progress': 0, Completed: 0 };
-    projects.forEach((project) => {
-      counts[project.status] += 1;
-    });
+    const now = new Date();
+    const in7Days = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const in30Days = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-    const labels = Object.keys(counts);
+    let dueSoon = 0;
+    let dueThisMonth = 0;
+    let dueLater = 0;
+
+    projects
+      .filter((project) => project.status !== 'Completed')
+      .forEach((project) => {
+        const deadline = new Date(project.deadline);
+        if (deadline <= in7Days) dueSoon += 1;
+        else if (deadline <= in30Days) dueThisMonth += 1;
+        else dueLater += 1;
+      });
+
     return {
-      labels,
+      labels: ['This Week', 'This Month', 'Later'],
       datasets: [
         {
-          data: labels.map((label) => counts[label as keyof typeof counts]),
-          backgroundColor: labels.map((label) => statusColors[label]),
+          data: [dueSoon, dueThisMonth, dueLater],
+          backgroundColor: ['#f97316', '#eab308', '#ec4899'],
           borderWidth: 1,
         },
       ],
@@ -39,7 +44,6 @@ export function ProjectStatusChart() {
   }, [projects]);
 
   if (loading) return <p>Loading chart…</p>;
-
   if (projects.length === 0) {
     return (
       <p className="text-gray-500 dark:text-gray-400">No project data yet.</p>
@@ -48,7 +52,7 @@ export function ProjectStatusChart() {
 
   return (
     <div className="rounded-xl border border-gray-200 p-6 shadow-sm dark:border-gray-700">
-      <h2 className="mb-4 text-lg font-semibold">Project Status Overview</h2>
+      <h2 className="mb-4 text-lg font-semibold">Deadline Urgency</h2>
       <div className="relative mx-auto h-64 max-w-xs">
         <Doughnut
           data={chartData}

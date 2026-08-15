@@ -4,7 +4,7 @@ import { CompletionRate } from '@/components/statistics/CompletionRate';
 import { OverdueRate } from '@/components/statistics/OverdueRate';
 import { ProjectStatusChart } from '@/components/statistics/ProjectStatusChart';
 import { ProjectPriorityChart } from '@/components/statistics/ProjectPriorityChart';
-import { OverdueStatusChart } from '@/components/statistics/OverdueStatusChart';
+import { DeadlineUrgencyChart } from '@/components/statistics/DeadlineUrgencyChart';
 
 export default function StatisticsPage() {
   return (
@@ -37,7 +37,7 @@ export default function StatisticsPage() {
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3 items-start">
         <ProjectStatusChart />
         <ProjectPriorityChart />
-        <OverdueStatusChart />
+        <DeadlineUrgencyChart />
       </div>
     </div>
   );

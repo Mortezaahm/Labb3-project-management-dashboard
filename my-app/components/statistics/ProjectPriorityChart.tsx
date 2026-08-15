@@ -11,17 +11,20 @@ import {
   Legend,
 } from 'chart.js';
 import { useProjects } from '@/hooks/useProjects';
+import { useSettings } from '@/components/providers/SettingsProvider';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const priorityColors: Record<string, string> = {
-  Low: '#38bdf8',
+  Low: '#0ea5e9',
   Medium: '#f59e0b',
   High: '#ef4444',
 };
 
 export function ProjectPriorityChart() {
   const { projects, loading } = useProjects();
+  const { theme } = useSettings();
+  const textColor = theme === 'dark' ? '#f8fafc' : '#171717';
 
   const chartData = useMemo(() => {
     const counts = { Low: 0, Medium: 0, High: 0 };
@@ -59,7 +62,19 @@ export function ProjectPriorityChart() {
             responsive: true,
             maintainAspectRatio: false,
             plugins: { legend: { display: false } },
-            scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } },
+            scales: {
+              x: {
+                ticks: { font: { size: 14 }, color: textColor },
+              },
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 1,
+                  font: { size: 14 },
+                  color: textColor,
+                },
+              },
+            },
           }}
         />
       </div>
