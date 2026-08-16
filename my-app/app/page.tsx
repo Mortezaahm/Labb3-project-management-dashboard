@@ -1,11 +1,12 @@
 // Our homepage
 import Link from 'next/link'
 import { getSession } from '@/lib/auth'
-import { Button } from '@/components/Button'
+// import { Button } from '@/components/Button'
 import { SiteImage } from '@/components/Image'
 import { CardFeature } from '@/components/Card'
 import { FAQSection } from '@/components/Question'
 import { BookOpen, Zap, CheckCircle } from 'lucide-react'
+import { ui } from '@/lib/styles'
 
 export default async function Home() {
     const session = await getSession()
@@ -42,13 +43,17 @@ export default async function Home() {
 
                         <div className="flex flex-col items-center justify-center gap-4">
                             <div className="flex flex-row items-center justify-center gap-3">
-                                <Link href="/register">
-                                    <Button className="bg-black">
-                                        Join today
-                                    </Button>
+                                <Link
+                                    className={ui.linkButtonStyles}
+                                    href="/register"
+                                >
+                                    Join today
                                 </Link>
-                                <Link href="/login">
-                                    <Button className="bg-black">Login</Button>
+                                <Link
+                                    className={ui.linkButtonStyles}
+                                    href="/login"
+                                >
+                                    Login
                                 </Link>
                             </div>
                             <p className="text-gray-600 dark:text-white">
@@ -98,12 +103,15 @@ export default async function Home() {
 
                     <FAQSection />
                     <section className="container mx-auto px-4 pt-8 pb-24 max-w-4xl">
-                        <div className="flex flex-col items-center justify-center gap-4 bg-gray-600 text-white rounded-xl shadow-xl py-10 px-6 sm:px-0 text-center">
-                            <h2 className="text-3xl mb-2 text-white">
+                        <div className="flex flex-col items-center justify-center gap-4 bg-gray-700 dark:bg-blue-100 text-white rounded-xl shadow-xl py-10 px-6 sm:px-0 text-center">
+                            <h2 className="text-3xl mb-2 text-white dark:text-black">
                                 Start managing your projects today!
                             </h2>
-                            <Link href="/register">
-                                <Button className="bg-black">Join Now</Button>
+                            <Link
+                                className={`${ui.secondaryLinkButtonStyles}`}
+                                href="/register"
+                            >
+                                Join Now
                             </Link>
                         </div>
                     </section>

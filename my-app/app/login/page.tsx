@@ -7,6 +7,7 @@ import { Button } from '@/components/Button'
 import { SiteImage } from '@/components/Image'
 import Input from '@/components/ui/Input'
 
+
 export default function Login() {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -76,7 +77,7 @@ export default function Login() {
                                 placeholder="John@example.com"
                                 required
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="text-sm"
+                                className="text-sm dark:placeholder:text-gray-300"
                             />
                         </div>
 
@@ -96,7 +97,7 @@ export default function Login() {
                                 name="password"
                                 placeholder="Password"
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="text-sm"
+                                className="text-sm dark:placeholder:text-gray-300"
                             />
                         </div>
                         {error && (
@@ -106,7 +107,7 @@ export default function Login() {
                         )}
                         <Button
                             type="submit"
-                            className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4"
+                            className="w-full py-2 px-4 bg-blue-900 hover:bg-blue-700 mt-4"
                             disabled={loading}
                         >
                             {loading ? 'logging in...' : 'Login'}{' '}

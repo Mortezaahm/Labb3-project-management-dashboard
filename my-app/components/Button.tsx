@@ -19,7 +19,16 @@ export function Button({
     ...props
 }: ButtonProps) {
     const standardStyles =
-        'rounded-lg shadow-md transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
+        `rounded-lg shadow-md transition-colors cursor-pointer
+        disabled:opacity-50 disabled:cursor-not-allowed
+
+        outline-none focus:outline-none
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-blue-500
+        focus-visible:ring-offset-2
+        focus-visible:ring-offset-white
+        `
 
     const buttonStyles: Record<ButtonVariant, string> = {
         primary: 'bg-[#2563EB] text-white hover:bg-[#1E3A8A]',
