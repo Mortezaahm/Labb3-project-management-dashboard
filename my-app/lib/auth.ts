@@ -15,16 +15,13 @@ const client = new MongoClient(MONGODB_URI)
 // you can change the database name if you want, but make sure to update it in the .env.local file as well
 // morteza db name is : "Nextjs-Lab3"
 // leon db name is : "projectmanager"
-const db = client.db('Nextjs-Lab3')
+const db = client.db('projectmanager')
 
 export const auth = betterAuth({
-    database: mongodbAdapter(db, {client}),
+    database: mongodbAdapter(db, { client }),
 
-  // Just to test from my mobile
-  trustedOrigins: [
-    "http://localhost:3000",
-    "http://192.168.10.102:3000",
-  ],
+    // Just to test from my mobile
+    trustedOrigins: ['http://localhost:3000', 'http://192.168.10.102:3000'],
     // makes sure that user can sign in with email and password
     emailAndPassword: {
         enabled: true

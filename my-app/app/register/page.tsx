@@ -91,7 +91,7 @@ export default function Register() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 value={email}
                                 required
-                                className="text-sm"
+                                className="text-sm dark:placeholder:text-gray-300"
                             />
                         </div>
 
@@ -109,7 +109,7 @@ export default function Register() {
                                 onChange={(e) => setName(e.target.value)}
                                 value={name}
                                 required
-                                className="text-sm"
+                                className="text-sm dark:placeholder:text-gray-300"
                             />
                         </div>
 
@@ -128,7 +128,7 @@ export default function Register() {
                                 placeholder="Password"
                                 onChange={(e) => setPassword(e.target.value)}
                                 value={password}
-                                className="text-sm"
+                                className="text-sm dark:placeholder:text-gray-300"
                             />
                         </div>
                         {error && (
@@ -138,8 +138,8 @@ export default function Register() {
                         )}
                         <Button
                             type="submit"
+                            className="w-full py-2 px-4 bg-blue-900 hover:bg-blue-700 mt-4"
                             disabled={loading}
-                            className="w-full py-2 px-4 bg-blue-900 rounded-md shadow hover:bg-blue-700 mt-4"
                         >
                             {loading ? 'Creating account...' : 'Sign up'}
                         </Button>
