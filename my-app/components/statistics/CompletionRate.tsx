@@ -1,6 +1,4 @@
-// import { projectHistory } from '@/data/statistics'
 import { progressionBarColor } from '@/utils/progressionBar'
-// import { getMonthlyProjects } from '@/utils/statisticsCalc'
 
 interface CompletionRateProps {
     completedProjects: number

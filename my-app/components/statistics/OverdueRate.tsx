@@ -1,6 +1,4 @@
-// import { projectHistory } from '@/data/statistics'
 import { progressionBarColor } from '@/utils/progressionBar'
-// import { getMonthlyProjects } from '@/utils/statisticsCalc'
 
 interface OverdueRateProps {
     overdueProjects: number
@@ -11,7 +9,9 @@ interface OverdueRateProps {
 
 export function OverdueRate({
     overdueProjects,
-    totalProjects, monthlyOverdue, monthlyProjects
+    totalProjects,
+    monthlyOverdue,
+    monthlyProjects
 }: OverdueRateProps) {
     // Calculates the all time overdue rate
     const allTimeOverdueRate =

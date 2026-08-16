@@ -1,5 +1,5 @@
 type Project = {
-    id: number,
+    id: string,
     title: string,
     status: string,
     updated: string
