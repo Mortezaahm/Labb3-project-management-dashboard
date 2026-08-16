@@ -1,27 +1,31 @@
-import { projectHistory } from '@/data/statistics'
+// import { projectHistory } from '@/data/statistics'
 import { progressionBarColor } from '@/utils/progressionBar'
-import { getMonthlyProjects } from '@/utils/statisticsCalc'
+// import { getMonthlyProjects } from '@/utils/statisticsCalc'
 
 interface CompletionRateProps {
     completedProjects: number
     totalProjects: number
+    monthlyCompletedProjects: number
+    monthlyProjects: number
 }
 
 export function CompletionRate({
     completedProjects,
-    totalProjects
+    totalProjects,
+    monthlyCompletedProjects,
+    monthlyProjects
 }: CompletionRateProps) {
     // Gets the projects completed in the active month
-    const monthlyProjects = getMonthlyProjects(projectHistory)
+    // const monthlyProjects = getMonthlyProjects(projectHistory)
     // Completed projects in the active month
-    const monthlyCompleted = monthlyProjects.filter(
-        (project) => project.status === 'Completed'
-    ).length
+    // const monthlyCompleted = monthlyProjects.filter(
+    //     (project) => project.status === 'Completed'
+    // ).length
 
     // Monthly completion percentage
     const monthlyCompletionRate =
-        monthlyProjects.length > 0
-            ? Math.round((monthlyCompleted / monthlyProjects.length) * 100)
+        monthlyProjects > 0
+            ? Math.round((monthlyCompletedProjects / monthlyProjects) * 100)
             : 0
 
     // Calculates the all time completion rate
