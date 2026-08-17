@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useProjects } from '@/hooks/useProjects';
-import { useSettings } from '@/components/providers/SettingsProvider';
+import { useSettings } from '@/hooks/useSettings';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

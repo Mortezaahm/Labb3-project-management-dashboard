@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import { ui } from "@/lib/styles";
-import { useSettings } from "../providers/SettingsProvider";
+import { useSettings } from "@/hooks/useSettings";
 import { useRouter } from "next/navigation";
 
 type AccessibilitySectionProps = {

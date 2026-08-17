@@ -11,7 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { useProjects } from '@/hooks/useProjects';
-import { useSettings } from '@/components/providers/SettingsProvider';
+import { useSettings } from '@/hooks/useSettings';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
