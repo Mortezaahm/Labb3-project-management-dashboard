@@ -20,9 +20,14 @@ export function ProjectDetailsHeader({ project }: { project: Project }) {
       >
         ← Back to projects
       </Link>
-      <div className="mt-2 flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{project.title}</h1>
-        <div className="flex gap-2">
+      <div className="mt-2 flex items-center justify-between gap-2">
+        <h1
+          title={project.title}
+          className="min-w-0 flex-1 truncate text-2xl font-bold"
+        >
+          {project.title}
+        </h1>
+        <div className="flex flex-shrink-0 gap-2">
           <Link
             href={`/projects/${project._id}/edit`}
             className="rounded-lg border border-gray-300 px-3 py-1 text-sm dark:border-gray-600"

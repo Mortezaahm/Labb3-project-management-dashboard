@@ -43,6 +43,7 @@ export function ProjectFilters({
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
           aria-label="Search projects by title"
+          className="!mb-0"
         />
       </div>
       <select
