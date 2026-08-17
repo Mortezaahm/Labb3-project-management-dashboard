@@ -1,18 +1,19 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { SettingsContext } from "@/components/context/SettingsContext";
 import type { Settings, Theme, FontSize } from "@/types/types";
 import { settingsStorage } from "@/lib/settings-storage";
 import { useTheme } from "next-themes";
 
-type SettingsContextType = {
-  theme: Theme;
-  fontSize: FontSize;
-  setTheme: (t: Theme) => void;
-  setFontSize: (f: FontSize) => void;
-};
+// type SettingsContextType = {
+//   theme: Theme;
+//   fontSize: FontSize;
+//   setTheme: (t: Theme) => void;
+//   setFontSize: (f: FontSize) => void;
+// };
 
-const SettingsContext = createContext<SettingsContextType | null>(null);
+// const SettingsContext = createContext<SettingsContextType | null>(null);
 
 export default function SettingsProvider({
   children,
@@ -92,8 +93,8 @@ export default function SettingsProvider({
   );
 }
 
-export function useSettings() {
-  const ctx = useContext(SettingsContext);
-  if (!ctx) throw new Error("useSettings must be used inside SettingsProvider");
-  return ctx;
-}
+// export function useSettings() {
+//   const ctx = useContext(SettingsContext);
+//   if (!ctx) throw new Error("useSettings must be used inside SettingsProvider");
+//   return ctx;
+// }
