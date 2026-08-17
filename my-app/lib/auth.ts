@@ -4,6 +4,7 @@ import { MongoClient } from 'mongodb'
 import { headers } from 'next/headers'
 
 const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_DB_NAME = process.env.MONGODB_DB_NAME
 
 if (!MONGODB_URI) {
     throw new Error(
@@ -11,11 +12,15 @@ if (!MONGODB_URI) {
     )
 }
 
+if (!MONGODB_DB_NAME) {
+    throw new Error(
+        'Please define the MONGODB_DB_NAME environment variable inside .env.local'
+    )
+}
+
 const client = new MongoClient(MONGODB_URI)
-// you can change the database name if you want, but make sure to update it in the .env.local file as well
-// morteza db name is : "Nextjs-Lab3"
-// leon db name is : "projectmanager"
-const db = client.db('Nextjs-Lab3')
+
+const db = client.db(MONGODB_DB_NAME)
 
 export const auth = betterAuth({
     database: mongodbAdapter(db, {client}),
