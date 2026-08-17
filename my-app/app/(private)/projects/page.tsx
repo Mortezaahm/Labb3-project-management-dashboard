@@ -8,6 +8,7 @@ import {
   type SortOption,
 } from '@/components/projects/ProjectFilters';
 import { Pagination } from '@/components/projects/Pagination';
+import { usePagination } from '@/hooks/usePagination';
 import type { ProjectStatus } from '@/types/project';
 import Link from 'next/link';
 
@@ -22,7 +23,7 @@ export default function ProjectsPage() {
     'All',
   );
   const [sortOption, setSortOption] = useState<SortOption>('newest');
-  const [page, setPage] = useState(1);
+   // const [page, setPage] = useState(1);
 
   const filteredProjects = useMemo(() => {
     let result = projects;
@@ -52,9 +53,17 @@ export default function ProjectsPage() {
     return result;
   }, [projects, search, statusFilter, sortOption]);
 
+  const {
+  currentPage,
+  totalPages,
+  pagedItems: pagedProjects,
+  goToPage,
+  resetPage,
+} = usePagination(filteredProjects, PAGE_SIZE);
+
   useEffect(() => {
-    setPage(1);
-  }, [search, statusFilter, sortOption]);
+    resetPage();
+  }, [search, statusFilter, sortOption, resetPage]);
 
   const handleDelete = useCallback(
     async (id: string) => {
@@ -63,14 +72,14 @@ export default function ProjectsPage() {
     [deleteProject],
   );
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredProjects.length / PAGE_SIZE),
-  );
-  const pagedProjects = filteredProjects.slice(
-    (page - 1) * PAGE_SIZE,
-    page * PAGE_SIZE,
-  );
+  // const totalPages = Math.max(
+  //   1,
+  //   Math.ceil(filteredProjects.length / PAGE_SIZE),
+  // );
+  // const pagedProjects = filteredProjects.slice(
+  //   (page - 1) * PAGE_SIZE,
+  //   page * PAGE_SIZE,
+  // );
 
   if (loading) return <p>Loading projects…</p>;
   if (error) return <p>Error: {error}</p>;
@@ -103,9 +112,9 @@ export default function ProjectsPage() {
         ))}
       </div>
       <Pagination
-        currentPage={page}
+        currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={setPage}
+        onPageChange={goToPage}
       />
     </div>
   );
