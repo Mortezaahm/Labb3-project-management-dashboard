@@ -87,6 +87,7 @@ export default function Register() {
                             <Input
                                 type="email"
                                 id="email"
+                                name="email"
                                 placeholder="John@example.com"
                                 onChange={(e) => setEmail(e.target.value)}
                                 value={email}
@@ -105,6 +106,7 @@ export default function Register() {
                             <Input
                                 type="text"
                                 id="name"
+                                name="name"
                                 placeholder="John Doe"
                                 onChange={(e) => setName(e.target.value)}
                                 value={name}
@@ -123,6 +125,7 @@ export default function Register() {
                             <Input
                                 type="password"
                                 id="password"
+                                name="password"
                                 required
                                 minLength={8}
                                 placeholder="Password"

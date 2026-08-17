@@ -1,7 +1,6 @@
 // Our homepage
 import Link from 'next/link'
 import { getSession } from '@/lib/auth'
-// import { Button } from '@/components/Button'
 import { SiteImage } from '@/components/Image'
 import { CardFeature } from '@/components/Card'
 import { FAQSection } from '@/components/Question'
