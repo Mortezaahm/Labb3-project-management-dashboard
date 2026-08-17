@@ -1,6 +1,6 @@
 "use client";
 
-import { useSettings } from "../providers/SettingsProvider";
+import { useSettings } from "@/hooks/useSettings";
 
 export default function FontSizeSelector() {
   const { fontSize, setFontSize } = useSettings();
