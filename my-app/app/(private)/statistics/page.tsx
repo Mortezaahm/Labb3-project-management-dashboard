@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation'
 import { ProjectStatusChart } from '@/components/statistics/ProjectStatusChart'
 import { ProjectPriorityChart } from '@/components/statistics/ProjectPriorityChart'
 import { DeadlineUrgencyChart } from '@/components/statistics/DeadlineUrgencyChart'
+import {ui} from "@/lib/styles";
 
 export default async function StatisticsPage() {
     const statsData = await getStatistics()
@@ -20,7 +21,7 @@ export default async function StatisticsPage() {
                 Statistics
             </h1>
 
-            <p className="mt-2">
+            <p className={ui.text}>
                 Here you can view detailed statistics about your activities,
                 project performance, and overall progress. Analyze your data to
                 make informed decisions and improve your workflow.

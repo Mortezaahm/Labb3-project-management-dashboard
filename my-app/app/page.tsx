@@ -17,7 +17,7 @@ export default async function Home() {
                     <h1 className="text-blue-900 text-center font-bold mb-7 text-4xl dark:text-white">
                         Glad to see you {user.name}!
                     </h1>
-                    <p className="text-center">
+                    <p className={`text-center ${ui.text}`}>
                         Ready to continue managing your projects? Visit{' '}
                         <Link
                             href="/dashboard"
@@ -34,7 +34,7 @@ export default async function Home() {
                             <h1 className="text-blue-900 font-bold mb-7 text-6xl dark:text-white">
                                 Project Management, simplified
                             </h1>
-                            <p className="text-gray-600 mb-10 text-lg dark:text-gray-300">
+                            <p className={`text-center mb-10 text-lg ${ui.text}`}>
                                 Organize your work, track your progress, meet
                                 deadlines and always stay on top with TaskFlow.
                             </p>

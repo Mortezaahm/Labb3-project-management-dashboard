@@ -115,7 +115,7 @@ export default function Login() {
                         </Button>
                         <p className="text-center mt-2 dark:text-black">
                             Not signed up?{' '}
-                            <Link href="/register" className="text-blue-800">
+                            <Link href="/register" className="text-blue-800 hover:text-blue-600">
                                 Register
                             </Link>{' '}
                         </p>
