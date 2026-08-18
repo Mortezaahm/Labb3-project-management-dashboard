@@ -151,7 +151,7 @@ export default function Register() {
                         </Button>
                         <p className="text-center mt-2 dark:text-black">
                             Already have an account?{' '}
-                            <Link href="/login" className="text-blue-800">
+                            <Link href="/login" className="text-blue-800 hover:text-blue-600">
                                 Login
                             </Link>
                         </p>
