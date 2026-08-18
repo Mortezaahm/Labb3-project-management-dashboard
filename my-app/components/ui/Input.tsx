@@ -29,6 +29,8 @@ export default function Input({
         dark:border-gray-600
         dark:bg-gray-700
         dark:text-white
+        
+        dark:[&:-webkit-autofill]:[-webkit-box-shadow:0_0_0px_1000px_#374151_inset]
 
         ${className}
       `}
