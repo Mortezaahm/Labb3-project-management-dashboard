@@ -1,0 +1,113 @@
+"use client"
+import { useState , useRef , useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+import { ui } from "@/lib/styles"
+
+type AvatarSectionProps = {
+  user: {
+    name: string;
+    image?: string | null;
+  };
+};
+
+export default function AvatarSection({user}: AvatarSectionProps) {
+  const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [preview, setPreview] = useState(user.image || "");
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const router = useRouter();
+
+  const handleUpload = async () => {
+    try {
+      setMessage("")
+      if (!file) {
+        setMessage("Please select a file to upload");
+        return;
+      }
+
+      setLoading(true)
+
+      const formData = new FormData();
+      formData.append("avatar", file);
+
+      const response = await fetch ("/api/avatar", {
+        method: "PATCH",
+        body: formData
+      })
+
+      const data = await response.json()
+      if (!response.ok) {
+        throw new Error(data.message)
+      }
+
+      setMessage("Avatar updated successfully")
+      router.refresh();
+    } catch (error) {
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong"
+      );
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    return () => {
+      if (preview.startsWith("blob:")) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
+
+  return (
+    <>
+      <Image
+        src={preview || user.image || "/default-avatar.png"}
+        alt={`${user.name} avatar`}
+        width={96}
+        height={96}
+        className={ui.image}
+      />
+
+      <input
+        ref={fileInputRef}
+        id="avatar-upload"
+        type="file"
+        accept="image/*"
+        onChange={(e) => {
+          const selectedFile = e.target.files?.[0];
+          if (!selectedFile) return;
+
+          setFile(selectedFile);
+
+          const previewUrl = URL.createObjectURL(selectedFile);
+          setPreview(previewUrl);
+        }}
+        className="hidden"
+      />
+      <button
+        type="button"
+        onClick={() => fileInputRef.current?.click()}
+        className={ui.buttonSecondary}
+      >
+        Choose Avatar
+      </button>
+      <button
+        className={ui.buttonPrimary}
+        onClick={handleUpload}
+      >
+          {loading ? "Changing..." : "Change Avatar" }
+      </button>
+      {message && (
+        <p className={ui.messageText}>{message}</p>
+      )}
+    </>
+  )
+}

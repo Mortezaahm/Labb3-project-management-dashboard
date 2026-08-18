@@ -1,0 +1,98 @@
+"use client";
+import { useState } from "react";
+import { ui } from "@/lib/styles";
+
+type UserInfoFormProps = {
+    user: {
+        name: string
+        email: string
+        bio?: string
+    }
+}
+
+export default function UserInfoForm( {user} : UserInfoFormProps) {
+    const [name, setName] = useState(user.name)
+    const [bio, setBio] = useState(user.bio || "")
+
+    const [loading, setLoading] = useState(false)
+    const [message, setMessage] = useState("")
+
+    const handleSubmit = async () => {
+        try {
+            setLoading(true)
+            setMessage("")
+
+            const response = await fetch("/api/profile", {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name,
+                    bio
+                })
+            })
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error (data.message)
+            }
+            setMessage("Profile updated successfully")
+        } catch (error) {
+            setMessage(
+                error instanceof Error ? error.message : "Something went wrong"
+            )
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    return (
+        <>
+        <h2 className={ui.subtitle}>Personal Information</h2>
+        <label
+            htmlFor="name"
+            className={ui.label}>
+            Name
+        </label>
+        <input
+            id="name"
+            value={name}
+            onChange={(e) => {setName(e.target.value)}}
+            className={ui.input}
+        />
+        <label
+            htmlFor="email"
+            className={ui.label}>
+            Email
+        </label>
+        <input
+            id="email"
+            value={user.email}
+            className={ui.input}
+            readOnly
+        />
+        <label
+            htmlFor="bio"
+            className={ui.label}>
+                Bio
+        </label>
+        <textarea
+            id="bio"
+            className={ui.input}
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
+        />
+        <button
+            onClick={handleSubmit}
+            disabled={loading}
+            className={ui.buttonPrimary}
+        >
+          {loading ? "Saving..." : "Save Changes"}
+        </button>
+        {message && (
+            <p className="mt-2 text-sm">{message}</p>
+        )}
+        </>
+    )
+}
