@@ -7,7 +7,6 @@ import { Button } from '@/components/Button'
 import { SiteImage } from '@/components/Image'
 import Input from '@/components/ui/Input'
 
-
 export default function Login() {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -73,6 +72,7 @@ export default function Login() {
                                 type="email"
                                 id="email"
                                 name="email"
+                                autoComplete="email"
                                 value={email}
                                 placeholder="John@example.com"
                                 required
@@ -94,6 +94,7 @@ export default function Login() {
                                 value={password}
                                 required
                                 minLength={8}
+                                autoComplete="current-password"
                                 name="password"
                                 placeholder="Password"
                                 onChange={(e) => setPassword(e.target.value)}
